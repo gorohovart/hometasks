@@ -8,9 +8,7 @@ bool isEqual(char a, char b)
 {
     const int comp = 'a' - 'A';
 
-    if (a == b || fabs(a - b) == comp)
-        return true;
-    return false;
+    return(a == b || fabs(a - b) == comp);
 }
 
 int main()
