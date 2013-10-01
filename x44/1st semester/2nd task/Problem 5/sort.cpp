@@ -4,6 +4,12 @@
 using namespace std;
 using namespace sort;
 
+namespace sort
+{
+    void heapify(int*, int, int);
+    void makeHeap(int*, int, int);
+}
+
 void sort::heapify(int *heap, int firstElement, int lastElement)
 {
     int current = firstElement;
