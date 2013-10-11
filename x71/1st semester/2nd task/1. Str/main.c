@@ -1,15 +1,13 @@
-#include <cstdio>
-#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
 #include "str.h"
-
-using namespace std;
-using namespace str;
 
 int main ()
 {
 	char s1[1000];
 	char s2[1000];
-	
+	char s3[1000];
+
     printf("input s1: ");
     fgets(s1, 200, stdin);
 
@@ -17,8 +15,6 @@ int main ()
 	fgets(s2, 200, stdin);
 
 	printf("\nstrlen(s1) = %d\nstrlen(s2) = %d\n", strlen(s1), strlen(s2));
-
-    char s3[1000];
 
     strcpy(s3, s1);
     printf("s3 = s1 = %s\n", s3);

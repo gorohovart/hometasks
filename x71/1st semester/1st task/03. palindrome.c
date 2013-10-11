@@ -1,27 +1,27 @@
-#include <cstring>
-#include <cstdio>
-#include <cmath>
+#include <string.h>
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
 
-using namespace std;
-
-bool isEqual(char a, char b)
+int isEqual(char a, char b)
 {
     const int comp = 'a' - 'A';
 
     if ((a == b) || (fabs(a - b) == comp))
-        return true;
-    return false;
+        return 1;
+    return 0;
 }
 
 int main()
 {
     char s[200];
+    int a = 0;
+    int b = 0;
 
     printf("input string : ");
     fgets(s, 200, stdin);
-
-    int a = 0;
-    int b = strlen(s) - 2;
+    
+    b = strlen(s) - 2;
 
     while (a <= b)
     {
@@ -33,9 +33,10 @@ int main()
         if (a > b)
             break;
 
-        if (!isEqual(s[a], s[b]))
+        if (isEqual(s[a], s[b]) == 0)
         {
-            printf("s is not palindrome");
+            printf("string is not palindrome.\n");
+            system("pause");
             return 0;
         }
         a++;
@@ -43,7 +44,8 @@ int main()
 
     }
 
-    printf("s is palindrome");
+    printf("string is palindrome");
 
+    system("pause");
     return 0;
 }

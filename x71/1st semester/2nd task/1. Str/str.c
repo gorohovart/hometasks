@@ -1,11 +1,8 @@
-#include <cstdio>
-#include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
 #include "str.h"
 
-using namespace std;
-using namespace str;
-
-int str::strlen(char *string)
+int strlen(char *string)
 {
 	int i = 0;
 
@@ -14,29 +11,31 @@ int str::strlen(char *string)
 	return i;
 }
 
-void str::strcpy(char *s1, char *s2)
+void strcpy(char *s1, char *s2)
 {
 	int len2 = strlen(s2);
 
-	for (int i = 0; i < len2; i++)
+    int i = 0;
+	for (i = 0; i < len2; i++)
 		s1[i] = s2[i];
 
     s1[len2] = 0;
 }
 
-void str::strcat(char *s1, char *s2)
+void strcat(char *s1, char *s2)
 {
 	int len1 = strlen(s1);
 	int len2 = strlen(s2);
+    int i = 0;
 
-	for (int i = len1; i < len1 + len2; i++)
+	for (i = len1; i < len1 + len2; i++)
 		s1[i] = s2[i - len1];
 
     s1[len1 + len2] = 0;
 }
 
 
-int str::strcmp(char *s1, char *s2)
+int strcmp(char *s1, char *s2)
 {
 	int len1 = strlen(s1);
 	int len2 = strlen(s2);

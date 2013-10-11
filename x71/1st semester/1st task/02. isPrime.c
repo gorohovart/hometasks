@@ -1,11 +1,11 @@
-#include <cstring>
-#include <cstdio>
-
-using namespace std;
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 int isPrime(int n)
 {
-    for (int i = 2; i * i < n; i++)
+    int i;
+    for (i = 2; i * i < n; i++)
     {
         if (n % i == 0)
             return 0;
@@ -25,5 +25,6 @@ int main()
         printf("Your number is prime.\n");
     else printf("Your number is not prime.\n");
 
+    system("pause");
     return 0;
 }
