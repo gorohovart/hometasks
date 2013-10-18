@@ -1,5 +1,5 @@
 #include <iostream>
-
+// Артем лох
 using namespace std;
 
 int pow(int a, int n)
