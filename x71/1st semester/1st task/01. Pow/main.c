@@ -1,3 +1,9 @@
+/*
+Artem Gorokhov (c) 2013
+
+Homework 1
+Binary Power Function
+*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -32,6 +38,5 @@ int main()
     else
         printf("a^n = %f \n", 1.0 / pow(a, n * -1));
 
-    system("pause");
     return 0;
 }
