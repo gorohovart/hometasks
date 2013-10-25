@@ -1,3 +1,9 @@
+/*
+Artem Gorokhov (c) 2013
+
+Homework 1
+Проверка на простоту
+*/
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,6 +31,5 @@ int main()
         printf("Your number is prime.\n");
     else printf("Your number is not prime.\n");
 
-    system("pause");
     return 0;
 }
