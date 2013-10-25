@@ -1,3 +1,9 @@
+/*
+Artem Gorokhov (c) 2013
+
+Homework 2
+string library
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "str.h"
@@ -24,6 +30,5 @@ int main ()
 
     printf("s1 > s2? %d\n", strcmp(s1, s2));
 
-    system ("pause");
 	return 0;
 }

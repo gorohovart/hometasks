@@ -1,3 +1,9 @@
+/*
+Artem Gorokhov (c) 2013
+
+Homework 2
+string library
+*/
 #pragma once
 
 int strlen(char*);
