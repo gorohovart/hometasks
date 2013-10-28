@@ -12,13 +12,9 @@ int pow(int a, int n)
     int b;
 
     if (n == 0)
-    {
         return 1;
-    }
     if (n % 2 == 1)
-    {
         return pow(a, n - 1) * a;
-    }
     else
     {
         b = pow (a, n / 2);
@@ -38,13 +34,9 @@ int main()
     scanf("%d", &n);
 
     if (n >= 0)
-    {
         printf("a^n = %d \n", pow(a, n));
-    }
     else
-    {
         printf("a^n = %f \n", 1.0 / pow(a, n * -1));
-    }
 
     return 0;
 }
