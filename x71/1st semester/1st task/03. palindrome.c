@@ -1,9 +1,3 @@
-/*
-Artem Gorokhov (c) 2013
-
-Homework 1
-Number is palindrome?
-*/
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
@@ -52,5 +46,6 @@ int main()
 
     printf("string is palindrome");
 
+    system("pause");
     return 0;
 }
