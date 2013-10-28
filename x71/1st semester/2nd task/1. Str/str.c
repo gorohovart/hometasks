@@ -1,9 +1,3 @@
-/*
-Artem Gorokhov (c) 2013
-
-Homework 2
-string library
-*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "str.h"
