@@ -1,0 +1,14 @@
+Small * 500000:
+random:      HeapSort: 2083, QuickSort: 167, BubbleSort: 872
+half-sorted: HeapSort: 2055, QuickSort: 962,  BubbleSort: 851
+sorted:      HeapSort: 2061, QuickSort: 936,  BubbleSort: 860
+
+Medium * 5000:
+random:      HeapSort: 1573, QuickSort: 1312, BubbleSort: 11829
+half-sorted: HeapSort: 1322, QuickSort: 732,  BubbleSort: 10762
+sorted:      HeapSort: 1308, QuickSort: 660,  BubbleSort: 9450
+
+Big:
+random:      HeapSort: 11, QuickSort: 7,  BubbleSort: 8014
+half-sorted: HeapSort: 10, QuickSort: 4,  BubbleSort: 8005
+sorted:      HeapSort: 10, QuickSort: 3,  BubbleSort: 7985	
