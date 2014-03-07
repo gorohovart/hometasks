@@ -134,3 +134,24 @@ void bubbleSort(int *array, int firstElement, int lastElement)
         }
     }
 }
+
+void bubbleSortNoSwap(int *array, int firstElement, int lastElement)
+{
+    int i = 0;
+    int j = 0;
+    
+    
+    for (i = firstElement; i < lastElement; i++)
+    {
+        for (j = i; j <= lastElement; j++)
+        {
+            if (array[i] > array[j])
+            {
+                int tmp = array[i];
+                array[i] = array[j];
+                array[j] = tmp;
+            }
+        }
+    }
+}
+

@@ -4,9 +4,7 @@ Artem Gorokhov (c) 2013
 Homework 1
 Number is prime?
 */
-#include <string.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 int isPrime(int n)
 {

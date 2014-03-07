@@ -5,7 +5,6 @@ Homework 3
 Decimal to binary
 */
 #include <stdio.h>
-#include <stdlib.h>
 
 void printBin(int n)
 {
@@ -36,6 +35,5 @@ int main ()
     scanf("%d", &n);
     printBin(n);
 
-    system ("pause");
     return 0;
 }

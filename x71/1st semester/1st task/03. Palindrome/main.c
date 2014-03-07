@@ -7,7 +7,6 @@ String is palindrome?
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
-#include <stdlib.h>
 
 int isEqual(char a, char b)
 {
