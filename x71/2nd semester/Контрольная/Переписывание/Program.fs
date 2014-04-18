@@ -50,19 +50,28 @@ let singleton (cdList : CodeTree list) : bool =
 
 let combine (cdList : CodeTree list) : CodeTree list =
     
+    let rec puti i list = 
+        match list with
+        | [] -> [i]
+        | hd :: tl -> if weight i < weight hd then i :: hd :: tl
+                      else hd :: (puti i tl)
+
     match cdList with
     | [] -> failwith("error")
-    | left :: right :: tl -> makeCodeTree left right :: tl
+    | left :: right :: tl -> puti (makeCodeTree left right) tl
     | hd :: tl -> failwith("error")
 
 let rec until is f lst=
-    if is lst then until is f (f lst)
+    if not (is lst) then until is f (f lst)
     else lst
 
 let createCodeTree (clist: string) : CodeTree = 
-    let singleList = until singleton combine (makeOderedLeafList (times (stringZchars clist)))
+    let charList = stringZchars clist
+    let timeList = times charList
+    let oderedLeafList = makeOderedLeafList timeList
+    let singleList = until singleton combine oderedLeafList
 
     match singleList with
-    | hd :: [] -> hd
+    | hd :: tl -> hd
 
-printfn "%A" (createCodeTree "aabcabcd")
+printfn "%A" (createCodeTree "beep boop beer!")
