@@ -1,4 +1,10 @@
-﻿let randomiseTF() =
+// Gorokhov Artem (c) 2014
+// 2nd semester HW 5
+
+//OOP world
+//Life simulation
+
+let randomiseTF() =
     let rnd = new System.Random()
     if rnd.Next(2) = 0 then false
     else true
