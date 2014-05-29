@@ -68,7 +68,21 @@ module Map =
                 
         
                 
-    type Map<[<EqualityConditionalOn>]'Key, [<EqualityConditionalOn;ComparisonConditionalOn>]'Value when 'Key : comparison>private(tree: Tree<'key, 'value>) =
+    type Map<'Key, 'Value when 'Key : comparison and 'Value : equality> private(tree: Tree<'Key, 'Value>) =
+        /// <summary>Builds a map that contains the bindings of the given IEnumerable.</summary>
+        /// <param name="elements">The input sequence of key/value pairs.</param>
+        /// <returns>The resulting map.</returns>
+        //new : elements:seq<'Key * 'Value> -> Map<'Key,'Value>
+        new(x: seq<'Key * 'Value>) = 
+            let t = ref Tree.Empty
+            let rec add' list =
+                match list with
+                | [] -> t
+                | hd::tl -> match hd with
+                            | (a, b) -> t := add (!t) a b
+                                        add' tl
+            Map<_,_>(!(add' (Seq.toList x)))
+        
         /// <summary>Returns a new map with the binding added to the given map.</summary>
         /// <param name="key">The input key.</param>
         /// <returns>The resulting map.</returns>
@@ -104,7 +118,7 @@ module Map =
         /// <param name="key">The input key.</param>
         /// <exception cref="System.Collections.Generic.KeyNotFoundException">Thrown when the key is not found.</exception>
         /// <returns>The value mapped to the key.</returns>
-        member this.Item (key: 'key) =
+        member this.Item (key: 'Key) =
             let rec item tree key =
                 match tree with
                 | Empty -> failwith "Key not found"
@@ -169,22 +183,53 @@ module Map =
                         tryFind l key
             tryFind tree key
 
-        //TODO:
-        //override this.ToString () =
         
-        //override Equals : obj -> bool                   
+        override this.ToString () =
+            let rec toString = function
+            | Empty -> "Empty"
+            | Node(a, b, x, y,_,_) -> "Node(" + toString a + ", " + toString b + ", " + x.ToString() + ", " + y.ToString() + ")"
+            toString tree
         
- 
-        //inherit IEnumerable<KeyValuePair<'Key, 'Value>>        
+        override this.Equals (some : obj) : bool =
+            match some with
+            | :? Map<'Key, 'Value> as map -> (Seq.forall2 (=) this map)
+            | _ -> false
         
+        member private this.GetEnumerator() =
+            let rec toList = function
+                | Empty -> []
+                | Node(a, b, x, y,_,_) -> (toList a) @ ((x, y) :: (toList b))
+            
+            let list = toList tree
+            let isUsed = ref false
+            let xList = ref list
+            let current() = 
+                if !isUsed then failwith("Use \"MoveNext\" before using \"Current\"")
+                else isUsed := true
+                     (!xList).Head
+
+            {new IEnumerator<'Key * 'Value> with
+                 member x.Current = current()
+
+             interface IEnumerator with
+                 member this.Current = current() :> obj
+                
+                 member this.MoveNext() =
+                     if !isUsed then xList := (!xList).Tail
+                     else isUsed := true
+                     not (!xList).IsEmpty
+
+                 member this.Reset() = 
+                     isUsed := false
+                     xList := list
+
+             interface System.IDisposable with
+                 member this.Dispose() = ()
+
+            }
+
+        interface IEnumerable<'Key * 'Value> with
+            member this.GetEnumerator() = this.GetEnumerator()
+        interface IEnumerable with
+             member x.GetEnumerator() = x.GetEnumerator() :> IEnumerator
         
-        /// <summary>Builds a map that contains the bindings of the given IEnumerable.</summary>
-        /// <param name="elements">The input sequence of key/value pairs.</param>
-        /// <returns>The resulting map.</returns>
-        //new : elements:seq<'Key * 'Value> -> Map<'Key,'Value>
-        
-        //Optional:
-        //inherit IDictionary<'Key, 'Value>        
-        //inherit ICollection<KeyValuePair<'Key, 'Value>>
-        //inherit System.IComparable
-        //inherit System.Collections.IEnumerable
