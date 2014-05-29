@@ -1,4 +1,9 @@
-﻿module imgParse
+﻿// Gorokhov Artem (c) 2014
+// 2nd semester HW 4
+// Web in continuation passing style
+// Takes list of urls 
+// Returns list of image links of urls that contains more than 5 images
+module imgParse
 
 open WebR
 open System
@@ -8,6 +13,12 @@ let urls =
      "http://images.yandex.ru";
      "http://google.com";
     ]
+
+let flag = ref false
+
+let rec wait() =
+    if not !flag then System.Threading.Thread.Sleep(200)
+                      wait()
 
 let imgNum (page:string) = 
     let rec num (pos:int) =
@@ -27,8 +38,9 @@ let getImages (page:string) =
 
 let rec parse urls g =
     match urls with
-    | [] -> g []
+    | [] -> flag := true
+            g []
     | hd :: tl -> getUrl hd (fun x -> parse tl (fun y -> g ((if imgNum x < 6 then [] else getImages x) @ y)))
                     
 parse urls (printfn "%A")
-Console.ReadLine()
+wait()
