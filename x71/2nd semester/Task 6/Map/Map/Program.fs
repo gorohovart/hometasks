@@ -3,8 +3,10 @@
 // Dictionary
 
 module Map = 
+    open System
     open System.Collections.Generic
     open System.Collections
+    open Microsoft.FSharp.Core
 /// <summary>Immutable maps. Keys are ordered by F# generic comparison.</summary>
 ///
 /// <remarks>Map interface based on Microsoft.FSharp.Collections.Map
@@ -75,13 +77,12 @@ module Map =
         //new : elements:seq<'Key * 'Value> -> Map<'Key,'Value>
         new(x: seq<'Key * 'Value>) = 
             let t = ref Tree.Empty
-            let rec add' list =
-                match list with
-                | [] -> t
-                | hd::tl -> match hd with
-                            | (a, b) -> t := add (!t) a b
-                                        add' tl
-            Map<_,_>(!(add' (Seq.toList x)))
+            let addAllToList list = 
+                List.fold (fun acc elem -> match elem with
+                                           | (a, b) -> t := add (!t) a b
+                                           (!t)
+                          ) (!t) list
+            Map<_,_>(addAllToList (Seq.toList x))
         
         /// <summary>Returns a new map with the binding added to the given map.</summary>
         /// <param name="key">The input key.</param>
@@ -194,7 +195,13 @@ module Map =
             match some with
             | :? Map<'Key, 'Value> as map -> (Seq.forall2 (=) this map)
             | _ -> false
-        
+
+        override this.GetHashCode() =
+            let mutable hash = 0
+            for i in this do
+                match i with
+                | (x, y) -> hash <= (hash + ((x.GetHashCode() * y.GetHashCode()) % Int32.MaxValue))
+            hash
         member private this.GetEnumerator() =
             let rec toList = function
                 | Empty -> []
@@ -232,4 +239,3 @@ module Map =
             member this.GetEnumerator() = this.GetEnumerator()
         interface IEnumerable with
              member x.GetEnumerator() = x.GetEnumerator() :> IEnumerator
-        
