@@ -6,6 +6,7 @@
 module imgParse
 
 open WebR
+open MapCPS
 open System
 
 let urls =
@@ -16,9 +17,8 @@ let urls =
 
 let flag = ref false
 
-let rec wait() =
-    if not !flag then System.Threading.Thread.Sleep(200)
-                      wait()
+let wait() =
+    while not !flag do System.Threading.Thread.Sleep(200)
 
 let imgNum (page:string) = 
     let rec num (pos:int) =
@@ -36,11 +36,8 @@ let getImages (page:string) =
                        [page.Substring (y + 5, z - y - 5)] :: get z
     Seq.distinct (get 0) |> Seq.toList
 
-let rec parse urls g =
-    match urls with
-    | [] -> flag := true
-            g []
-    | hd :: tl -> getUrl hd (fun x -> parse tl (fun y -> g ((if imgNum x < 6 then [] else getImages x) @ y)))
+let rec parse url g =
+    getUrl url (fun x -> if imgNum x < 6 then g [] else g (getImages x))
                     
-parse urls (printfn "%A")
+listMapCPS parse urls (printfn "%A")
 wait()

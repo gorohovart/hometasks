@@ -51,9 +51,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\mapCPS\mapCPS.fsproj">
+      <Name>mapCPS</Name>
+      <Project>{b0bf2a92-30be-4b56-851f-27936ec49166}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\WebR\WebR.fsproj">
       <Name>WebR</Name>
-      <Project>{a574cfe5-9103-47f4-a4b2-957066ebf70b}</Project>
+      <Project>{383466f5-e169-4397-81c2-1d89ead43f8d}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
