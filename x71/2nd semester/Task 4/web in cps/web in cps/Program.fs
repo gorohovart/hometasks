@@ -17,6 +17,10 @@ let urls =
 
 let flag = ref false
 
+let myPrintfn x = 
+    printfn "%A" x
+    flag := true
+
 let wait() =
     while not !flag do System.Threading.Thread.Sleep(200)
 
@@ -39,5 +43,5 @@ let getImages (page:string) =
 let rec parse url g =
     getUrl url (fun x -> if imgNum x < 6 then g [] else g (getImages x))
                     
-listMapCPS parse urls (printfn "%A")
+listMapCPS parse urls (myPrintfn)
 wait()
