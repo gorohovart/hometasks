@@ -1,1 +1,0 @@
-Before you build project, copy content of "Resource" folder to "./ChatBot/ChatBot/bin/Release"
