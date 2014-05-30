@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "intersect", "intersect\intersect.fsproj", "{5EB174DB-B386-40E8-A76C-42DEA20DD060}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Intersect", "Intersect\Intersect.fsproj", "{1EF7F51E-82DA-4A39-9E8B-E942F3C76B17}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "NUnit", "NUnit\NUnit.fsproj", "{D904E126-0D2B-4AC7-B005-D4FAC933189E}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tests", "Tests\Tests.fsproj", "{E87ED517-01E2-4000-A6BD-2910D9711CDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5EB174DB-B386-40E8-A76C-42DEA20DD060}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EB174DB-B386-40E8-A76C-42DEA20DD060}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EB174DB-B386-40E8-A76C-42DEA20DD060}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EB174DB-B386-40E8-A76C-42DEA20DD060}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D904E126-0D2B-4AC7-B005-D4FAC933189E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D904E126-0D2B-4AC7-B005-D4FAC933189E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D904E126-0D2B-4AC7-B005-D4FAC933189E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D904E126-0D2B-4AC7-B005-D4FAC933189E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EF7F51E-82DA-4A39-9E8B-E942F3C76B17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EF7F51E-82DA-4A39-9E8B-E942F3C76B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EF7F51E-82DA-4A39-9E8B-E942F3C76B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EF7F51E-82DA-4A39-9E8B-E942F3C76B17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E87ED517-01E2-4000-A6BD-2910D9711CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E87ED517-01E2-4000-A6BD-2910D9711CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E87ED517-01E2-4000-A6BD-2910D9711CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E87ED517-01E2-4000-A6BD-2910D9711CDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
