@@ -2,7 +2,10 @@
 
 open System.Text.RegularExpressions
 
-let pattern = "^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$"
-let emailRegex = new Regex(pattern);
 
-let checkEmail email = emailRegex.IsMatch(email)
+
+let checkEmail email =
+    let login = "[\w]([\.]|([.]?[\w]){0,30})[a-zA-Z\d]"
+    let afterAt = "([\w\d]{2,}[\.]){1,}(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|xxx|[a-z][a-z])"
+    let emailRegex = new Regex("^" + login + "@" + afterAt + "$");
+    emailRegex.IsMatch(email)
