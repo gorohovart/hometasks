@@ -200,8 +200,9 @@ module Map =
             let mutable hash = 0
             for i in this do
                 match i with
-                | (x, y) -> hash <= (hash + ((x.GetHashCode() * y.GetHashCode()) % Int32.MaxValue))
+                | (x, y) -> hash <- (hash + ((x.GetHashCode() * y.GetHashCode()) % Int32.MaxValue))
             hash
+
         member private this.GetEnumerator() =
             let rec toList = function
                 | Empty -> []
