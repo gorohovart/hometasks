@@ -1,6 +1,12 @@
-﻿insert into dbo.[Runs] ([ShipId], [ShipName], [DeparturePort], [DepartureTime], [ArrivalPort], [ArrivalTime]) values
-(11131,  N'Одесса', N'Титаник', N'2005/05/01 10:20', N'Одесса', N'2005/05/01 10:21'),
-(3325, N'Крым наш', N'Титаник11',N'2005/05/01 10:21', N'Нью-Йорк', N'2005/05/01 10:22')
+﻿insert into dbo.[Ships] ([Name]) values
+(N'Титаник'),
+(N'Титаник11')
+
+go
+
+insert into dbo.[Runs] ([ShipId], [DeparturePort], [DepartureTime], [ArrivalPort], [ArrivalTime]) values
+(1,  N'Одесса', N'2005/05/01 10:20', N'Одесса', N'2005/05/01 10:21'),
+(2, N'Крым наш', N'2005/05/01 10:21', N'Нью-Йорк', N'2005/05/01 10:22')
 
 go
 
@@ -11,18 +17,30 @@ insert into dbo.[CustomersInfo] ([Name], [Adress], [Email], [Fax], [Phone]) valu
 
 go
 
-insert into dbo.[Orders] ([Name], [Cost], [CustomerId], [Seal], [Weight]) values
-(N'asdlf', 10, 1, N'332119', 25),
-(N'sdfdfff', 11, 2, N'2ss2', 26),
-(N'sdfdfhhhf', 4, 3, N'2ds2', 11)
+insert into dbo.[Orders] ([Name], [Cost], [CustomerId], [Weight], [Time]) values
+(N'asdlf', 10, 1, 203, N'2005/05/01 10:00'),
+(N'sdfdfff', 11, 2, 100, N'2005/05/01 10:20'),
+(N'sdfdfhhhf', 4, 3, 100, N'2005/05/01 10:22')
 
 go
 
-insert into dbo.[Containers] ([Weight], [Сapacity], [Type], [OrderId], [RunId]) values
-(100, 59, N'Обычный', 1, 2),
-(301, 65, N'Необычный', 2, 1),
-(101, 43, N'обычный', 3, 2)
+insert into dbo.[Containers] ([Weight], [Сapacity], [Type]) values
+(100, 59, N'Обычный'),
+(301, 65, N'Необычный'),
+(101, 43, N'обычный'),
+(101, 43, N'обычный')
 
 go
+
+insert into dbo.[OrderedContainers] ([Weight], [Seal], [OrderId], [RunId], [ContainerId]) values
+(101, N'332119', 1, 1, 1),
+(102, N'2ss2', 1, 2, 3),
+(100, N'2ds2', 2, 1, 2),
+(100, N'2ds2', 3, 1, 4)
+
+go
+
+
+
 
 

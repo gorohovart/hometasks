@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Ships]
+(
+	[Id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[Name] NCHAR(50) NOT NULL
+)
