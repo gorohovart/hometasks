@@ -1,0 +1,11 @@
+﻿@model MvcApplication1.Models.Picture
+
+<div align="center" style="color:#ff0000; font-size: 250%">@Model.Type</div>
+<div align="center"><img src=@Model.urlFull height="600" /></div>
+<div align="center">@Model.Number / 10</div>
+
+<div align="center">
+    <form action="Index2">
+        <button type="submit">Try Again</button>
+    </form>
+</div>

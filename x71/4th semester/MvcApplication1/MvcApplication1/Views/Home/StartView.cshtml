@@ -1,0 +1,12 @@
+﻿@model MvcApplication1.Models.Picture
+
+<div align="center" style="font-size: 250%">Fashion or pornography?</div>
+<div align="center"><img src=@Model.url height="600"/></div>
+<div align="center">@Model.Number / 10</div>
+
+<div align="center">
+    <form action="Guess">
+        <button type="submit" name="type" value="Porn">Porn</button>
+        <button type="submit" name="type" value="Fashion">Fashion</button>
+    </form>
+</div>
