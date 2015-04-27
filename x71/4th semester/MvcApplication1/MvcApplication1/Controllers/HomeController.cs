@@ -15,6 +15,8 @@ namespace MvcApplication1.Controllers
     {
         public ActionResult Index()
         {
+            Session["Index"] = null;
+            Session["Pictures"] = null;
             return View();
         }
         public ActionResult Index2()
