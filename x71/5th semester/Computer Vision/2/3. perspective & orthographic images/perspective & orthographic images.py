@@ -13,23 +13,26 @@ def createWhiteImg(x, y):
 
 
 def perspectiveProjection(point, cx, angle):
-    ax, ay, az = point
+    ax, ay, az, _ = point
     f = (cx * 1.0) / math.tan(math.radians(angle))
     return int(f * ((ax * 1.0) / az) + cx), int(f * ((ay * 1.0) / az) + cx)
 
 
-def orthographicProjection(point):
-    x, y, z = point
+def orthographicProjection(points):
+    mat = np.asmatrix(points)
+    mat2 = np.asmatrix(np.array([[int(imgX/4), 0, 0, 0],
+                                 [0, int(imgY/4), 0, 0],
+                                 [0, 0, 0, 0],
+                                 [int(imgX/2), int(imgY/2), 0, 1]]))
+    return mat * mat2
 
-    return int(x * imgX / 4 + imgX / 2), int(y * imgY / 4 + imgY / 2)
 
+pointsOfSquare = np.array([[math.sqrt(2) * 3 / 2, 1, 7, 1],
+                          [-1 * math.sqrt(2) * 3 / 2, 1, 7, 1],
+                          [math.sqrt(2) * 3 / 2, -2, 10, 1],
+                          [-1 * math.sqrt(2) * 3 / 2, -2, 10, 1]])
 
-pointsOfSquare = [(math.sqrt(2) * 3 / 2, 1, 7),
-                  (-1 * math.sqrt(2) * 3 / 2, 1, 7),
-                  (math.sqrt(2) * 3 / 2, -2, 10),
-                  (-1 * math.sqrt(2) * 3 / 2, -2, 10)]
-
-imgX = 600
+imgX = 700
 imgY = imgX
 
 img = createWhiteImg(imgX, imgY)
@@ -47,9 +50,13 @@ cv2.imshow('Perspective', img)
 
 projections = []
 img.fill(255)
-for point in pointsOfSquare:
-    projections.append(orthographicProjection(point))
+projectionMat = np.asarray(orthographicProjection(pointsOfSquare))
 
+for point in projectionMat:
+    a, b = int(point[0]), int(point[1])
+    projections.append((a, b))
+
+print(projections)
 cv2.line(img, projections[0], projections[1], [0, 0, 0])
 cv2.line(img, projections[1], projections[3], [0, 0, 0])
 cv2.line(img, projections[3], projections[2], [0, 0, 0])
