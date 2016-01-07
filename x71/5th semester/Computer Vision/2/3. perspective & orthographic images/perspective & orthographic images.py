@@ -27,11 +27,14 @@ def orthographicProjection(points):
     return mat * mat2
 
 
-pointsOfSquare = np.array([[math.sqrt(2) * 3 / 2, 1, 7, 1],
-                          [-1 * math.sqrt(2) * 3 / 2, 1, 7, 1],
-                          [math.sqrt(2) * 3 / 2, -2, 10, 1],
-                          [-1 * math.sqrt(2) * 3 / 2, -2, 10, 1]])
+sq_side = math.sqrt(32) - math.sqrt(8)/2
 
+tmp1 = math.sqrt(((math.sqrt(32) - math.sqrt(8))**2)/2)
+
+pointsOfSquare = np.array([[sq_side/2, 1, 3, 1],
+                           [-1 * sq_side/2, 1, 3, 1],
+                           [sq_side/2, -1 * tmp1, 4 + tmp1, 1],
+                           [-1 * sq_side/2, -1 * tmp1, 4 + tmp1, 1]])
 imgX = 700
 imgY = imgX
 
@@ -56,7 +59,7 @@ for point in projectionMat:
     a, b = int(point[0]), int(point[1])
     projections.append((a, b))
 
-print(projections)
+# print(projections)
 cv2.line(img, projections[0], projections[1], [0, 0, 0])
 cv2.line(img, projections[1], projections[3], [0, 0, 0])
 cv2.line(img, projections[3], projections[2], [0, 0, 0])
