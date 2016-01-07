@@ -20,8 +20,8 @@ def perspectiveProjection(point, cx, angle):
 
 def orthographicProjection(points):
     mat = np.asmatrix(points)
-    mat2 = np.asmatrix(np.array([[int(imgX/4), 0, 0, 0],
-                                 [0, int(imgY/4), 0, 0],
+    mat2 = np.asmatrix(np.array([[int(imgX/2), 0, 0, 0],
+                                 [0, int(imgY/2), 0, 0],
                                  [0, 0, 0, 0],
                                  [int(imgX/2), int(imgY/2), 0, 1]]))
     return mat * mat2
@@ -53,19 +53,21 @@ cv2.imshow('Perspective', img)
 
 projections = []
 img.fill(255)
+# print(pointsOfSquare)
 projectionMat = np.asarray(orthographicProjection(pointsOfSquare))
+# print(projectionMat)
 
 for point in projectionMat:
     a, b = int(point[0]), int(point[1])
     projections.append((a, b))
 
-# print(projections)
+print('Orthographic Projection points: {}.'.format(projections))
 cv2.line(img, projections[0], projections[1], [0, 0, 0])
 cv2.line(img, projections[1], projections[3], [0, 0, 0])
 cv2.line(img, projections[3], projections[2], [0, 0, 0])
 cv2.line(img, projections[2], projections[0], [0, 0, 0])
 
 cv2.imshow('Orthographic', img)
-
+# print(math.sqrt((math.sqrt(1.5 ** 2 + 2.5 ** 2) * 2) ** 2 - 8) * math.sqrt(2))
 cv2.waitKey(0)
 cv2.destroyAllWindows()
