@@ -64,7 +64,7 @@ for point in pts:
         return max_err
     err = calcError([y, x], findRed())
     if max_err < err: max_err = err
-print("Error is:")
+print("Max error is:")
 print(max_err)
 
 cv2.imshow('Source', img)
