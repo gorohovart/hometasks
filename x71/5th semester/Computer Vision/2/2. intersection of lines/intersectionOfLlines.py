@@ -19,50 +19,56 @@ def createWhiteImg(x, y):
     return img
 
 
-def drawRandomPoints(img, numberOfPoints):
+def findBlackPoints(img):
     points = []
+    for x in range(img.shape[0]):
+        for y in range(img.shape[1]):
+            if compare(img[x, y], (0, 0, 0)):
+                points.append((x, y, 1))
+    return points
 
-    for i in range(numberOfPoints):
-        x = randint(0, img.shape[0])
-        y = randint(0, img.shape[1])
 
-        if compare(img[x, y], [0, 0, 0]):
-            points.append(drawRandomPoints(img, 1)[0])
+def drawRandomPoints(img, numberOfPoints):
+    for _ in range(numberOfPoints):
+        x = randint(0, img.shape[0] - 1)
+        y = randint(0, img.shape[1] - 1)
+
+        # check for equality with other point from already gotten
+        if compare(img[x, y], (0, 0, 0)):
+            drawRandomPoints(img, 1)
         else:
             img[x, y] = [0, 0, 0]
-            points.append((y, x, 1))
-    return points
 
 
 def drawLine(img, point1, point2):
     line = np.cross(point1, point2)
     a, b, c = line
-    x1, x2 = -1, imgX
+    x1, x2 = 0, imgX - 1
     y1, y2 = -(a * x1 + c) / b, -(a * x2 + c) / b
-    cv2.line(img, (x1, y1), (x2, y2), (0, 0, 0))
+    cv2.line(img, (y1, x1), (y2, x2), (0, 0, 0))
     return line
 
 
 def drawLines(img, points):
     lines = []
-
-    for i in range(len(points)):
-        for j in range(i + 1, len(points)):
-            lines.append(drawLine(img, points[i], points[j]))
+    for i, point1 in enumerate(points):
+        for j, point2 in enumerate(points[i + 1:], start=i):
+            lines.append(drawLine(img, point1, point2))
     return lines
 
 
 def showIntersectionOfLines(img, lines):
-    for i in range(len(lines)):
-        for j in range(i + 1, len(lines)):
-            y, x, k = np.cross(lines[i - 1], lines[j - 1])
+    for i, line1 in enumerate(lines):
+        for line2 in lines[i + 1:]:
+            x, y, k = np.cross(line1, line2)
             x, y = x / k, y / k
-            if 0 <= x and x < imgX and 0 <= y and y < imgY:
+            if 0 <= x < imgX and 0 <= y < imgY:
                 cv2.circle(img, (y, x), 2, (0, 0, 255), -1)
 
 
 img = createWhiteImg(imgX, imgY)
-points = drawRandomPoints(img, 4)
+drawRandomPoints(img, 4)
+points = findBlackPoints(img)
 lines = drawLines(img, points)
 showIntersectionOfLines(img, lines)
 
