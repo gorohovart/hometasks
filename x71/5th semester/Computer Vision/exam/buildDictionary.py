@@ -3,6 +3,7 @@ import kmeans
 import cPickle as pickle
 import time
 import numpy as np
+from random import randint
 
 
 def save_object(obj, filename):
@@ -11,7 +12,6 @@ def save_object(obj, filename):
 
 
 def buildDictionary(IS_REBUILD_NEED, IS_REREAD_NEED, NUMBER_OF_CLUSTERS, NUMBER_OF_IMAGES):
-
     max = 0
 
     if not (IS_REBUILD_NEED): return pickle.load(open('dictionary.pkl', 'rb'))
@@ -20,14 +20,11 @@ def buildDictionary(IS_REBUILD_NEED, IS_REREAD_NEED, NUMBER_OF_CLUSTERS, NUMBER_
     if IS_REREAD_NEED:
         sift = cv2.SIFT()
         start_time = time.time()
-        for i in range(1, NUMBER_OF_IMAGES, 50):
-            stri = str(i)
-            filename = './6/scene'
-            for _ in range(5 - len(stri)):
-                filename += '0'
-            filename = filename + stri + '.jpg'
-            im = cv2.imread(filename)
-            image = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
+        for i in range(1, NUMBER_OF_IMAGES, 10):
+            # Image read
+            filename = './6/' + str(i) + '.jpg'
+            image = cv2.imread(filename, cv2.CV_LOAD_IMAGE_GRAYSCALE)
+
             keypoints, descriptors = sift.detectAndCompute(image, None)
             if descriptors is None: continue
 
@@ -37,7 +34,7 @@ def buildDictionary(IS_REBUILD_NEED, IS_REREAD_NEED, NUMBER_OF_CLUSTERS, NUMBER_
                 x, y = keypoints[j].pt
                 descriptors_dictionary.append(descriptor)
                 keypoints_dictionary.append((i, (int(x), int(y))))
-            print((i * 100.0) / NUMBER_OF_IMAGES)
+            print((i * 100.0) / 300)
             print('\n')
         print(max)
         read_time = time.time()
@@ -52,60 +49,53 @@ def buildDictionary(IS_REBUILD_NEED, IS_REREAD_NEED, NUMBER_OF_CLUSTERS, NUMBER_
     cluster_time1 = time.time()
     # Clustering
     data = np.asarray(descriptors_dictionary)
-    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 1, 1.0)
-    ret, labels, centers = cv2.kmeans(data, NUMBER_OF_CLUSTERS, criteria, 1, cv2.KMEANS_RANDOM_CENTERS)
+    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 10, 1.0)
+    compactness, labels, centers = cv2.kmeans(data, NUMBER_OF_CLUSTERS, criteria, 1, cv2.KMEANS_RANDOM_CENTERS)
 
     cluster_time2 = time.time()
     clusterTime = cluster_time2 - cluster_time1
     print('Cluster time:' + str(clusterTime) + '\n')
+    print('Cluster time:' + str(clusterTime / 60) + ' ' + str(clusterTime % 60) + '\n')
+    print('Compactness:' + str(compactness) + '\n')
 
-    clustered = data, labels, centers, keypoints_dictionary
-    # gr_code_file = open('time.txt', 'w', encoding='utf8')
-
-    # cluster_time = time.time()
-
-    clusters = ([[] for i in range(NUMBER_OF_CLUSTERS)], [[] for i in range(NUMBER_OF_CLUSTERS)])
-    for i, cluster_number in enumerate(labels):
-        clusters[0][cluster_number].append(data[i])
-        clusters[1][cluster_number].append(keypoints_dictionary[i])
-    cent = np.asarray(centers, np.float32)
-    c = []
-    for i in range(NUMBER_OF_CLUSTERS):
-        c.append(np.asarray(clusters[0][i], np.float32))
-
-    result = ((c, clusters[1]), cent)
+    clustered = labels, centers, keypoints_dictionary
+    result = mk_clusters(clustered, NUMBER_OF_CLUSTERS)
 
     save_object(result, 'dictionary.pkl')
-    #  gr_code_file.writelines(str(readTime) + '\n' + str(len(dictionary)))
-    # clustered = kmeans.cluster(dictionary, NUMBER_OF_CLUSTERS)
-
-    # save_time = time.time()
-    #
-    #
-    # clusterTime = read_time - cluster_time
-    # saveTime = cluster_time - save_time
-    #
-    # gr_code_file.writelines(str(readTime) + '\n' + str(clusterTime) + '\n' + str(saveTime) + '\n')
-
     return result
 
 
-def mk_clusters(clustered, NUMBER_OF_CLUSTERS, keypoints_dictionary):
-    data, labels, centers = clustered
-    clusters = ([[] for i in range(NUMBER_OF_CLUSTERS)], [[] for i in range(NUMBER_OF_CLUSTERS)])
+def mk_clusters(clustered, NUMBER_OF_CLUSTERS):
+    labels, centers, keypoints_dictionary = clustered
+    clusters = ([[] for i in range(NUMBER_OF_CLUSTERS)])
+    # ccenters = [centers[i] for i in range(NUMBER_OF_CLUSTERS)]
+    ccenters = np.asarray(centers, np.float32)
     for i, cluster_number in enumerate(labels):
-        clusters[0][cluster_number].append(data[i])
-        clusters[1][cluster_number].append(keypoints_dictionary[i])
-    centers = np.asarray(centers, np.float32)
-    c = []
-    for i in range(NUMBER_OF_CLUSTERS):
-        c.append(np.asarray(clusters[0][i], np.float32))
-    return (c, clusters[1]), centers
+        clusters[cluster_number].append(keypoints_dictionary[i])
+    print('0 center: ')
+    print(centers[0])
+    print('\n')
+    return clusters, ccenters
 
-NUMBER_OF_IMAGES = 142101
-IS_REREAD_NEED = True
-IS_REBUILD_NEED = True
+
+def removeStopList(result):
+    clusters, centers = result
+
+    length_list = []
+    for cluster in clusters:
+        length_list.append(len(cluster))
+
+    length_list.sort()
+
+    text_file = open('result_images.txt', 'w', encoding='utf8')
+    for i in length_list:
+        text_file.write(str(i) + '\n')
+    text_file.close()
+
+
+# NUMBER_OF_IMAGES = 2843
+# IS_REREAD_NEED = False
 # IS_REBUILD_NEED = True
-NUMBER_OF_CLUSTERS = 6000
-clusters, centroids = buildDictionary(IS_REBUILD_NEED, IS_REREAD_NEED, NUMBER_OF_CLUSTERS,
-                                                      NUMBER_OF_IMAGES)
+# # IS_REBUILD_NEED = True
+# NUMBER_OF_CLUSTERS = 30000
+# clusters = buildDictionary(IS_REBUILD_NEED, IS_REREAD_NEED, NUMBER_OF_CLUSTERS, NUMBER_OF_IMAGES)
