@@ -9,7 +9,8 @@ type Tree =
         match this with
         | N n -> n.ToString()
         | L A -> "\." + A.ToString()
-        | App (A, B) -> "(" + A.ToString() + ") (" + B.ToString() + ")"
+        | App (L A, B) -> "(" + A.ToString() + ") " + B.ToString()
+        | App (A, B) -> A.ToString() + " " + B.ToString()
 
 let rec shift (N c) (N i) = function
     | N n -> N (if n < c then n else n+i)
