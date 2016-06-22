@@ -16,22 +16,21 @@ let rec shift (N c) (N i) = function
     | L A -> L (shift (N(c + 1)) (N i) A)
     | App (A, B) -> App (shift (N c) (N i) A, shift (N c) (N i) B)
 
-let rec substitution (N e) (N m) = function
+let rec substitution (N m) (N e) = function
     | N n -> N (if n = m then e else n)
-    | L A -> L (substitution (shift (N 0) (N 1) (N e)) (N (m+1)) A)
-    | App (A, B) -> App(substitution (N e) (N m) A, substitution (N e) (N m) B)
+    | L A -> L (substitution (N (m+1)) (shift (N 0) (N 1) (N e)) A)
+    | App (A, B) -> App(substitution (N m) (N e) A, substitution (N m) (N e) B)
 
 let rec reduction = function
-    | App ((L A), B) -> shift (N 0) (N -1) (substitution(shift (N 0) (N 1) B) (N 0) A)
+    | App ((L A), B) -> shift (N 0) (N -1) (substitution (N 0) (shift (N 0) (N 1) B) A)
     | L t -> L(reduction t)
-    | App (A, B) -> App(reduction A, reduction B)
+    | App (A, B) -> reduction <| App(reduction A, reduction B)
     | c -> c
 
 [<EntryPoint>]
 let main argv = 
-    let path = argv.[0]
-    let ast = L(App(L(App (N 1, N 0)), N 1))
-    
+    let ast1 = L(App(L(App (N 1, N 0)), N 1))
+    let ast = L(L(L(App( App( L(L(App( App(N 2, N 1), N 0))), N 1 ), N 2 ))))
     let reduced = reduction ast
 
     printfn "%A" (ast.ToString())
