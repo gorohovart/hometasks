@@ -25,10 +25,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>bin\Debug\lambda.XML</DocumentationFile>
     <Prefer32Bit>true</Prefer32Bit>
-    <StartArguments>
-    </StartArguments>
-    <StartWorkingDirectory>
-    </StartWorkingDirectory>
+    <StartArguments>test.t</StartArguments>
+    <StartWorkingDirectory>C:\hometasks\x71\6th semester\lambda\lambda\</StartWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
