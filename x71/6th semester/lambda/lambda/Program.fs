@@ -9,6 +9,8 @@ type Tree =
         match this with
         | N n -> n.ToString()
         | L A -> "\." + A.ToString()
+        | App (L A, App (B, C)) -> "(" + A.ToString() + ") (" + B.ToString() + ")"
+        | App (A, App (B, C)) -> A.ToString() + " (" + B.ToString() + ")"
         | App (L A, B) -> "(" + A.ToString() + ") " + B.ToString()
         | App (A, B) -> A.ToString() + " " + B.ToString()
 
