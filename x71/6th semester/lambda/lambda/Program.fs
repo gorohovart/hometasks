@@ -14,6 +14,7 @@ type Tree =
         | App (L A, B) -> "(" + (L A).ToString() + ") " + B.ToString()
         | App (A, B) -> A.ToString() + " " + B.ToString()
 
+
 let rec shift (N c) (N i) = function
     | N n -> N (if n < c then n else n+i)
     | L A -> L (shift (N(c + 1)) (N i) A)
@@ -24,12 +25,12 @@ let rec substitution (N m) e = function
     | L A -> L (substitution (N (m+1)) (shift (N 0) (N 1) e) A)
     | App (A, B) -> App(substitution (N m) e A, substitution (N m) e B)
 
-let rec reduction = function
-    | App ((L A), B) -> let c = B
-                        shift (N 0) (N -1) (substitution (N 0) (shift (N 0) (N 1) B) A)
-    | L t -> L(reduction t)
-    | App (A, B) -> reduction <| App(reduction A, reduction B)
-    | c -> c
+let rec reduce = function
+    | L t -> L(reduce t)
+    | App (a, B) -> match (reduce a) with
+                    | L A -> reduce (shift (N 0) (N -1) (substitution (N 0) (shift (N 0) (N 1) B) A))
+                    | A -> App(A, reduce B)
+    | N n -> N n
 
 let readInput path =
     let rec parseInput = function
@@ -50,22 +51,23 @@ let readInput path =
     match tail with
     | [] -> result
     | _ -> failwith "Too much args."
-let writeToFile path ast =
-    let rec astToList = function
+
+let rec astToList = function
     | N n -> [n.ToString()] 
     | L A -> "\\"::(astToList A)
     | App (A, B) -> "@"::(astToList A)@(astToList B)
 
-    File.WriteAllLines (path, astToList ast)
+let writeToFile path (time : TimeSpan) ast =
+    File.WriteAllLines (path, (time.ToString())::astToList ast)
         
 [<EntryPoint>]
 let main argv = 
     let path = argv.[0]
-    let ast1 = L(App(L(App (N 1, N 0)), N 1))
-    let ast2 = L(L(L(App( App( L(L(App( App(N 2, N 1), N 0))), N 1 ), N 2 ))))
     let ast = readInput path
     printfn "Your input:\n%s" (ast.ToString())
-    let reduced = reduction ast
+    let start = System.DateTime.Now
+    let reduced = reduce ast
+    let time = System.DateTime.Now - start
     printfn "Reduced:\n%s" (reduced.ToString())
-    writeToFile "result.txt" reduced
+    writeToFile "result.txt" time reduced
     0
