@@ -25,11 +25,10 @@ let rec substitution (N m) e = function
     | App (A, B) -> App(substitution (N m) e A, substitution (N m) e B)
 
 let rec reduction = function
-    | App ((L A), B) -> let c = B
-                        shift (N 0) (N -1) (substitution (N 0) (shift (N 0) (N 1) B) A)
+    | App ((L A), B) -> reduction (shift (N 0) (N -1) (substitution (N 0) (shift (N 0) (N 1) B) A))
     | L t -> L(reduction t)
     | App (A, B) -> reduction <| App(reduction A, reduction B)
-    | c -> c
+    | N n -> N n
 
 let readInput path =
     let rec parseInput = function
@@ -50,19 +49,29 @@ let readInput path =
     match tail with
     | [] -> result
     | _ -> failwith "Too much args."
-let writeToFile path ast =
-    let rec astToList = function
+
+let rec astToList = function
     | N n -> [n.ToString()] 
     | L A -> "\\"::(astToList A)
     | App (A, B) -> "@"::(astToList A)@(astToList B)
 
+let writeToFile path ast =
     File.WriteAllLines (path, astToList ast)
         
 [<EntryPoint>]
 let main argv = 
     let path = argv.[0]
-    let ast1 = L(App(L(App (N 1, N 0)), N 1))
-    let ast2 = L(L(L(App( App( L(L(App( App(N 2, N 1), N 0))), N 1 ), N 2 ))))
+    (*let ast = App(L(App(L(App (N 1, N 0)), N 1)), L(N 0))
+    let ast5 = App(L(App(L(N 0), N 0)), N 0)
+    let ast4 = L(L(L(App( App( L(L(App( App(N 2, N 1), N 0))), N 1 ), N 2 ))))
+    let ast1 = App(L(L(L(App( App( L(L(App( App(N 2, N 1), N 0))), N 1 ), N 2 )))), L(L(L(App( App( L(L(App( App(N 2, N 1), N 0))), N 1 ), N 2 )))))
+    
+    let astList1 = astToList ast
+    let astList2 = Seq.toList <| File.ReadAllLines path
+    printfn "%A" (List.forall2 (fun (a:string) (b:string) -> let aa = if a.Contains "\n" then a.Remove(a.IndexOf "\n") else a
+                                                             let bb = if b.Contains "\n" then b.Remove(b.IndexOf "\n") else b
+                                                             aa.Equals(bb)) astList1 astList2)
+    *)
     let ast = readInput path
     printfn "Your input:\n%s" (ast.ToString())
     let reduced = reduction ast
