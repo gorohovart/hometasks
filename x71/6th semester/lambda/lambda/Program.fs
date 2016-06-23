@@ -26,6 +26,7 @@ let rec substitution (N m) e = function
     | App (A, B) -> App(substitution (N m) e A, substitution (N m) e B)
 
 let rec reduce = function
+    | App ((L A), B) -> reduce (shift (N 0) (N -1) (substitution (N 0) (shift (N 0) (N 1) B) A))
     | L t -> L(reduce t)
     | App (a, B) -> match (reduce a) with
                     | L A -> reduce (shift (N 0) (N -1) (substitution (N 0) (shift (N 0) (N 1) B) A))
