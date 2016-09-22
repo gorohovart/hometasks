@@ -11,8 +11,8 @@ class Program
         var name = Console.ReadLine();
 
        	var rnd = new Random();
-       	var a = rnd.Next(10) + 1;
-       	var b = rnd.Next(10) + 1;
+       	var a = rnd.Next(1, 11);
+       	var b = rnd.Next(1, 11);
 
         Console.WriteLine("Сколько будет {0} + {1}", a, b);
         var result = Console.ReadLine();

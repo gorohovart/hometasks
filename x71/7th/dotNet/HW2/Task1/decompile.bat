@@ -1,1 +1,0 @@
-ildasm.exe task.exe /output:ILCode.il
