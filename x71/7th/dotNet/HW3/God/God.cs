@@ -6,7 +6,7 @@ namespace God
     internal class God : IGod
     {
         private readonly CreationHelper _helper = new CreationHelper();
-        public List<Human> Humans { get; set; }       
+        public List<Human> Humans { get; set; }
 
         public God()
         {
@@ -28,8 +28,8 @@ namespace God
 
         public int GetAllMoney()
         {
-            int summ = 0;
-            for (int i = 0; i < Humans.Count; i++)
+            var summ = 0;
+            for (var i = 0; i < Humans.Count; i++)
             {
                 summ += this[i];
             }
@@ -38,7 +38,7 @@ namespace God
 
         public Human CreateHuman()
         {
-            Gender gender = _helper.GetRandomGender();
+            var gender = _helper.GetRandomGender();
             return CreateHuman(gender);
         }
 
@@ -133,7 +133,9 @@ namespace God
         {
             var age = _helper.GetStudentRandomAge();
             var patronymic = _helper.GetRandomPatronymic(gender);
-            var averageRating = money == null ? _helper.GetRandomAverageRating() : _helper.GetAvgRatingByMoney(money.Value);
+            var averageRating = money == null
+                ? _helper.GetRandomAverageRating()
+                : _helper.GetAvgRatingByMoney(money.Value);
 
             return new Botan(averageRating, patronymic, name, age, gender);
         }
