@@ -7,9 +7,9 @@ namespace God
     {
         private readonly List<string> _manNames = new List<string> { "Егор", "Владимир", "Петр", "Константин", "Иван", "Семен" };
         private readonly List<string> _womanNames = new List<string> { "Вика", "Светлана", "Татьяна", "Валентина", "Екатерина" };
-        private const int _patronymicEndLength = 4;
-        private const string manPatronymicEnd = "ович";
-        private const string womanPatronymicEnd = "овна";
+        private const int PatronymicEndLength = 4;
+        private const string ManPatronymicEnd = "ович";
+        private const string WomanPatronymicEnd = "овна";
 
         private readonly Random _random = new Random();
 
@@ -22,12 +22,7 @@ namespace God
 
         public string GetNameByPatronymic(string patronymic)
         {
-            if (patronymic == null)
-            {
-                return string.Empty;
-            }
-            //-ович или овна
-            return patronymic.Substring(0, patronymic.Length - _patronymicEndLength);
+            return patronymic?.Substring(0, patronymic.Length - PatronymicEndLength) ?? string.Empty;
         }
 
         public int GetStudentRandomAge()
@@ -52,7 +47,7 @@ namespace God
         public string GetRandomPatronymic(Gender gender)
         {
             var name = GetRandomName(Gender.Male);
-            return gender == Gender.Male ? (name + manPatronymicEnd) : (name + womanPatronymicEnd);
+            return gender == Gender.Male ? (name + ManPatronymicEnd) : (name + WomanPatronymicEnd);
         }
 
         public int GetRandomMoney()
@@ -64,16 +59,16 @@ namespace God
 
         public int GetRandomChildrenCount()
         {
-            var minCount = 1;
-            var maxCount = 7;
+            const int minCount = 1;
+            const int maxCount = 7;
             return _random.Next(minCount, maxCount);
         }
 
         public double GetRandomAverageRating()
         {
-            var startRating = 4.0;
+            const double startRating = 4.0;
             var modifier = _random.NextDouble();
-            return modifier + 4.0;
+            return modifier + startRating;
         }
 
         public HumanType GetRandomHumanType()
@@ -85,7 +80,7 @@ namespace God
 
         public int GetMomeyByRating(double rating)
         {
-            var baseMod = 10;
+            const int baseMod = 10;
             return (int)Math.Pow(baseMod, (rating));
         }
 

@@ -45,7 +45,7 @@
     <Compile Include="Enums\HumanType.cs" />
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Human\CoolParent.cs" />
-    <Compile Include="Helpers\CreateHelper.cs" />
+    <Compile Include="Helpers\CreationHelper.cs" />
     <Compile Include="God.cs" />
     <Compile Include="GodConsole.cs" />
     <Compile Include="Human\Human.cs" />

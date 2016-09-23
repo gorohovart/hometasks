@@ -14,7 +14,7 @@ namespace God
 
         public override string ToString()
         {
-            return base.ToString() + String.Format(", Количество денег: ");
+            return base.ToString() + ", Количество денег: ";
         }
     }
 }
