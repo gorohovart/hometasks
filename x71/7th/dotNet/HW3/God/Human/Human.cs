@@ -18,7 +18,9 @@ namespace God
         
         public override string ToString()
         {
-            return $"Имя: {Name}, Возраст: {Age}, Пол: {(Gender == Gender.Male ? "М" : "Ж")}";
+            return Resource.Name + ": " + Name + ", "
+                    + Resource.Age + ": " + Age + ", "
+                    + Resource.Gender + ": " + (Gender == Gender.Male ? Resource.Male : Resource.Female);
         }
     }
 }

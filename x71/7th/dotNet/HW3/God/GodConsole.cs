@@ -4,33 +4,33 @@ namespace God
 {
     internal sealed class GodConsole
     {
-        private readonly IGod _god;
-        private const string Path = @"TotalMoney.txt";
-        private readonly PrintHelper _printHelper;
+        private readonly God God;
+        private string Path = Resource.OutputFileName;
+        private readonly PrintHelper PrintHelper;
 
         public GodConsole()
         {
-            _god = new God();
-            _printHelper = new PrintHelper();
+            God = new God();
+            PrintHelper = new PrintHelper();
         }
 
         public void Run()
         {
             if (!CheckDate())
             {
-                Console.WriteLine("Извините, сегодня воскресение. Сотворить людей не получится!");
+                Console.WriteLine(Resource.SundayError);
                 return;
             }
 
-            Console.WriteLine("Добрый день. Вы используете консоль бога.\nСколько людей вы хотите сотворить?");
+            Console.WriteLine(Resource.Greeting);
 
             int humansCount;
             while (!int.TryParse(Console.ReadLine(), out humansCount) || humansCount < 1)
             {
-                Console.WriteLine("Вы ввели некорректное число. Попробуйте еще раз");
+                Console.WriteLine(Resource.InputError);
             }
 
-            _printHelper.PrintColourInfo();
+            PrintHelper.PrintColourInfo();
 
             for (var i = 0; i < humansCount; i++)
             {
@@ -38,23 +38,23 @@ namespace God
                 switch (i)
                 {
                     case 0:
-                        human = _god.CreateHuman(Gender.Male);
+                        human = God.CreateHuman(Gender.Male);
                         break;
                     case 1:
-                        human = _god.CreateHuman(Gender.Female);
+                        human = God.CreateHuman(Gender.Female);
                         break;
                     default:
-                        human = _god.CreateHuman();
+                        human = God.CreateHuman();
                         break;
                 }
 
-                _printHelper.PrintHuman(human);
+                PrintHelper.PrintHuman(human);
 
-                var pair = _god.CreatePair(human);
-                _printHelper.PrintPair(pair);
+                var pair = God.CreatePair(human);
+                PrintHelper.PrintPair(pair);
             }
 
-            PrintTotalMoney();
+            PrintTotalMoney(God);
         }
 
         private static bool CheckDate()
@@ -63,11 +63,8 @@ namespace God
             return date.DayOfWeek != DayOfWeek.Sunday;
         }
 
-        private void PrintTotalMoney()
+        private void PrintTotalMoney(God god)
         {
-            var god = _god as God;
-            if (god == null) return;
-
             var money = god.GetAllMoney();            
             System.IO.File.WriteAllText(Path, money.ToString());
         }

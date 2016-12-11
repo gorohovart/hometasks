@@ -2,7 +2,7 @@
 
 namespace God
 {
-    internal class Botan : Student
+    internal sealed class Botan : Student
     {
         private const float MinRate = 3;
         public double AverageRating { get; }       
@@ -16,7 +16,7 @@ namespace God
        
         public override string ToString()
         {
-            return base.ToString() + $", Средняя оценка: {AverageRating:F}";
+            return base.ToString() + ", " + Resource.AvgScore + ": " + AverageRating;
         }
     }
 }
