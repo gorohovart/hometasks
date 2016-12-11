@@ -2,7 +2,7 @@
 
 namespace God
 {
-    internal class CoolParent : Parent
+    internal sealed class CoolParent : Parent
     {
         public int MoneyCount { get; private set; }
 

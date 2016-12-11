@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace God
 {
-    internal class God : IGod
+    internal sealed class God : IGod
     {
         private readonly CreationHelper _helper = new CreationHelper();
         public List<Human> Humans { get; set; }
@@ -19,7 +19,7 @@ namespace God
             {
                 if (i < 0 && i > Humans.Count - 1)
                 {
-                    return 0;
+                    throw new IndexOutOfRangeException();
                 }
                 var coolParent = Humans[i] as CoolParent;
                 return coolParent?.MoneyCount ?? 0;
@@ -79,7 +79,7 @@ namespace God
                 return null;
             }
 
-            Human pair = null;
+            Human pair;
 
             if (human is Student)
             {

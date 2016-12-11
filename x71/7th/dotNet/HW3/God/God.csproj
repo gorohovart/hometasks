@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\MoneyPrinter.cs" />
     <Compile Include="Human\Botan.cs" />
     <Compile Include="Enums\HumanType.cs" />
     <Compile Include="Enums\Gender.cs" />

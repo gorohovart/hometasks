@@ -1,11 +1,11 @@
 ﻿using System;
+using God.Helpers;
 
 namespace God
 {
     internal sealed class GodConsole
     {
         private readonly IGod _god;
-        private const string Path = @"TotalMoney.txt";
         private readonly PrintHelper _printHelper;
 
         public GodConsole()
@@ -53,8 +53,11 @@ namespace God
                 var pair = _god.CreatePair(human);
                 _printHelper.PrintPair(pair);
             }
+            var god = _god as God;
+            if (god == null) return;
 
-            PrintTotalMoney();
+            var money = god.GetAllMoney();
+            MoneyPrinter.PrintTotalMoney(money);
         }
 
         private static bool CheckDate()
@@ -63,13 +66,6 @@ namespace God
             return date.DayOfWeek != DayOfWeek.Sunday;
         }
 
-        private void PrintTotalMoney()
-        {
-            var god = _god as God;
-            if (god == null) return;
-
-            var money = god.GetAllMoney();            
-            System.IO.File.WriteAllText(Path, money.ToString());
-        }
+        
     }
 }

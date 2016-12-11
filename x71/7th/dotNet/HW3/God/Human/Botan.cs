@@ -2,7 +2,7 @@
 
 namespace God
 {
-    internal class Botan : Student
+    internal sealed class Botan : Student
     {
         private const float MinRate = 3;
         public double AverageRating { get; }       
