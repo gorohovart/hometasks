@@ -9,12 +9,12 @@ namespace God
             : base(name, age, gender)
         {
             ChildrenCount = childrenCount > 0 ? childrenCount : 0;
-            PrintColour = ConsoleColor.Green;
+            PrintColour = ConsoleColor.Cyan;
         }
         
         public override string ToString()
         {
-            return base.ToString() + $", Количество детей: {ChildrenCount}";
+            return base.ToString() + ", " + Resource.ChildrenCount + ": " + ChildrenCount;
         }
     }
 }

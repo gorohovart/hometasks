@@ -5,19 +5,18 @@ namespace God
 {
     internal sealed class God : IGod
     {
-        private readonly CreationHelper _helper = new CreationHelper();
-        public List<Human> Humans { get; set; }
+        private readonly CreationHelper Helper = new CreationHelper();
+        private List<Human> Humans = new List<Human>();
 
         public God()
         {
-            Humans = new List<Human>();
         }
 
         public int this[int i]
         {
             get
             {
-                if (i < 0 && i > Humans.Count - 1)
+                if (i < 0 || i > Humans.Count - 1)
                 {
                     throw new IndexOutOfRangeException();
                 }
@@ -38,15 +37,15 @@ namespace God
 
         public Human CreateHuman()
         {
-            var gender = _helper.GetRandomGender();
+            var gender = Helper.GetRandomGender();
             return CreateHuman(gender);
         }
 
         public Human CreateHuman(Gender gender)
         {
             Human human;
-            var name = _helper.GetRandomName(gender);
-            var humanType = _helper.GetRandomHumanType();
+            var name = Helper.GetRandomName(gender);
+            var humanType = Helper.GetRandomHumanType();
             switch (humanType)
             {
                 case HumanType.Student:
@@ -81,10 +80,10 @@ namespace God
 
             Human pair;
 
-            if (human is Student)
+            var student = human as Student;
+            if (student != null)
             {
-                var student = human as Student;
-                var name = _helper.GetNameByPatronymic(student.Patronymic);
+                var name = Helper.GetNameByPatronymic(student.Patronymic);
                 var botan = student as Botan;
 
                 if (botan != null)
@@ -99,18 +98,19 @@ namespace God
             }
             else if (human is Parent)
             {
-                var gender = _helper.GetRandomGender();
-                var name = _helper.GetRandomName(gender);
-
+                var parent = human as Parent;
+                var gender = Helper.GetRandomGender();
+                var name = Helper.GetRandomName(gender);
+                var partonymic = Helper.GetPatronymicByParent(parent, gender);
                 var coolParent = human as CoolParent;
                 if (coolParent != null)
                 {
                     var money = coolParent.MoneyCount;
-                    pair = CreateBotan(name, gender, money);
+                    pair = CreateBotan(name, gender, partonymic, money);
                 }
                 else
                 {
-                    pair = CreateStudent(name, gender);
+                    pair = CreateStudent(name, gender, partonymic);
                 }
             }
             else
@@ -121,38 +121,42 @@ namespace God
             return pair;
         }
 
-        private Student CreateStudent(string name, Gender gender)
+        private Student CreateStudent(string name, Gender gender, string _patronymic = null)
         {
-            var age = _helper.GetStudentRandomAge();
-            var patronymic = _helper.GetRandomPatronymic(gender);
+            var age = Helper.GetStudentRandomAge();
+            var patronymic = _patronymic == null
+                ? Helper.GetRandomPatronymic(gender)
+                : _patronymic;
 
             return new Student(patronymic, name, age, gender);
         }
 
-        private Botan CreateBotan(string name, Gender gender, int? money = null)
+        private Botan CreateBotan(string name, Gender gender, string _patronymic = null, int? money = null)
         {
-            var age = _helper.GetStudentRandomAge();
-            var patronymic = _helper.GetRandomPatronymic(gender);
+            var age = Helper.GetStudentRandomAge();
+            var patronymic = _patronymic == null
+                ? Helper.GetRandomPatronymic(gender)
+                : _patronymic;
             var averageRating = money == null
-                ? _helper.GetRandomAverageRating()
-                : _helper.GetAvgRatingByMoney(money.Value);
+                ? Helper.GetRandomAverageRating()
+                : Helper.GetAvgRatingByMoney(money.Value);
 
             return new Botan(averageRating, patronymic, name, age, gender);
         }
 
         private Parent CreateParent(string name, Gender gender)
         {
-            var age = _helper.GetParentRandomAge();
-            var childrenCount = _helper.GetRandomChildrenCount();
+            var age = Helper.GetParentRandomAge();
+            var childrenCount = Helper.GetRandomChildrenCount();
 
             return new Parent(childrenCount, name, age, gender);
         }
 
         private CoolParent CreateCoolParent(string name, Gender gender, double? avgRating = null)
         {
-            var age = _helper.GetParentRandomAge();
-            var childrenCount = _helper.GetRandomChildrenCount();
-            var money = avgRating == null ? _helper.GetRandomMoney() : _helper.GetMomeyByRating(avgRating.Value);
+            var age = Helper.GetParentRandomAge();
+            var childrenCount = Helper.GetRandomChildrenCount();
+            var money = avgRating == null ? Helper.GetRandomMoney() : Helper.GetMomeyByRating(avgRating.Value);
 
             return new CoolParent(money, childrenCount, name, age, gender);
         }

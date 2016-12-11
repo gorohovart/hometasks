@@ -19,9 +19,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CPP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Medved.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -29,6 +26,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

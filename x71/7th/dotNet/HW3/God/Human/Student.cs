@@ -14,7 +14,7 @@ namespace God
 
         public override string ToString()
         {
-            return base.ToString() + $", Отчество: {Patronymic}";
+            return base.ToString() + ", " + Resource.Patronymic + ": " + Patronymic;
         }
     }
 }

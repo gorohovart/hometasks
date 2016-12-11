@@ -16,7 +16,7 @@ namespace God
        
         public override string ToString()
         {
-            return base.ToString() + $", Средняя оценка: {AverageRating:F}";
+            return base.ToString() + ", " + Resource.AvgScore + ": " + AverageRating;
         }
     }
 }
