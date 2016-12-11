@@ -33,22 +33,21 @@ namespace God
         public void PrintColourInfo()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write("Классные родители");
+            Console.Write(Resource.Parents);
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(" Студенты");
+            Console.Write(" " + Resource.Students);
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(" Ботаны");
+            Console.Write(" " + Resource.Botans);
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(" Крутые предки\n");
+            Console.Write(" " + Resource.CoolParents);
 
-            Console.Write(string.Empty);
+            Console.WriteLine(string.Empty);
 
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("Суммарные деньги крутых предков выведены в файл TotalMoney.txt,");
-            Console.WriteLine("который находится рядом с исполняемым файлом.");
+            Console.WriteLine(Resource.OutputFileName + " " + Resource.TotalMoneyGreeting);
 
             Console.WriteLine(string.Empty);
         }

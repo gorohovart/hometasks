@@ -2,7 +2,7 @@
 
 namespace God
 {
-    internal class CoolParent : Parent
+    internal sealed class CoolParent : Parent
     {
         public int MoneyCount { get; private set; }
 
@@ -10,11 +10,12 @@ namespace God
             : base(childrenCount, name, age, gender)
         {
             MoneyCount = moneyCount > 0 ? moneyCount : 0;
+            PrintColour = ConsoleColor.Green;
         }       
 
         public override string ToString()
         {
-            return base.ToString() + ", Количество денег: ";
+            return base.ToString() + ", " + Resource.MoneyAmount + ": ";
         }
     }
 }
