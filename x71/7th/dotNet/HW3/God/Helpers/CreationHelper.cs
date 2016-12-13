@@ -21,6 +21,7 @@ namespace God.Helpers
 
         public string GetNameByPatronymic(string patronymic)
         {
+            if (patronymic == null) throw new ArgumentNullException();
             return patronymic?.Substring(0, patronymic.Length - PatronymicEndLength) ?? string.Empty;
         }
 
@@ -57,6 +58,7 @@ namespace God.Helpers
 
         public string GetPatronymicByName(string name, Gender gender)
         {
+            if (name == null) throw new ArgumentNullException();
             return gender == Gender.Male ? (name + ManPatronymicEnd) : (name + WomanPatronymicEnd);
         }
 
@@ -67,12 +69,10 @@ namespace God.Helpers
             return _random.Next(minMoney, maxMoney);
         }
 
-        public int GetRandomChildrenCount()
+        public int GetChildrenCount()
         {
-            //const int minCount = 1;
-            //const int maxCount = 7;
-            //return Random.Next(minCount, maxCount);
-            return 1;
+            const int childrenCount = 1;
+            return childrenCount;
         }
 
         public double GetRandomAverageRating()

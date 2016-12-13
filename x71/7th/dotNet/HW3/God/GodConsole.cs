@@ -63,7 +63,7 @@ namespace God
         private static bool SundayCheck()
         {
             var date = DateTime.Now;
-            return true; //date.DayOfWeek != DayOfWeek.Sunday;
+            return date.DayOfWeek != DayOfWeek.Sunday;
         }
 
         

@@ -10,6 +10,7 @@ namespace God.Helpers
     {
         public static ConsoleColor ParseColor(string colorName)
         {
+            if (colorName == null) throw new ArgumentNullException();
             ConsoleColor color;
             Enum.TryParse(colorName, out color);
             return color;

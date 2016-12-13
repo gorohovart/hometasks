@@ -133,7 +133,7 @@
     <value>Количество детей</value>
   </data>
   <data name="CoolParentColor" xml:space="preserve">
-    <value>Green</value>
+    <value>DarkGreen</value>
   </data>
   <data name="CoolParents" xml:space="preserve">
     <value>Крутые предки</value>
@@ -170,7 +170,7 @@
     <value>DarkGray</value>
   </data>
   <data name="ParentColor" xml:space="preserve">
-    <value>Cyan</value>
+    <value>DarkBlue</value>
   </data>
   <data name="Parents" xml:space="preserve">
     <value>Родители</value>

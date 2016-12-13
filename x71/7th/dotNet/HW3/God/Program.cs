@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace God
+﻿namespace God
 {
     internal sealed class Program
     {

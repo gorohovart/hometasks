@@ -6,11 +6,7 @@ namespace God.Helpers
     {
         public void PrintHuman(Human human)
         {
-            if (human == null)
-            {
-                return;
-            }
-
+            if (human == null) throw new ArgumentNullException();
             Console.ForegroundColor = human.PrintColour;
             Console.Write(human.ToString());
 
@@ -26,6 +22,7 @@ namespace God.Helpers
 
         public void PrintPair(Human pair)
         {
+            if (pair == null) throw new ArgumentNullException();
             Console.BackgroundColor = ColorHelper.ParseColor(Resource.PairBackgroundColor);
             PrintHuman(pair);
             Console.BackgroundColor = ConsoleColor.Black;

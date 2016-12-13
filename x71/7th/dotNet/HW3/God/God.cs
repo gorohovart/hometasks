@@ -74,10 +74,7 @@ namespace God
 
         public Human CreatePair(Human human)
         {
-            if (human == null)
-            {
-                return null;
-            }
+            if (human == null) throw new ArgumentNullException();
 
             Human pair;
 
@@ -148,7 +145,7 @@ namespace God
         private Parent CreateParent(string name, Gender gender)
         {
             var age = Helper.GetParentRandomAge();
-            var childrenCount = Helper.GetRandomChildrenCount();
+            var childrenCount = Helper.GetChildrenCount();
 
             return new Parent(childrenCount, name, age, gender);
         }
@@ -156,7 +153,7 @@ namespace God
         private CoolParent CreateCoolParent(string name, Gender gender, double? avgRating = null)
         {
             var age = Helper.GetParentRandomAge();
-            var childrenCount = Helper.GetRandomChildrenCount();
+            var childrenCount = Helper.GetChildrenCount();
             var money = avgRating == null ? Helper.GetRandomMoney() : Helper.GetMomeyByRating(avgRating.Value);
 
             return new CoolParent(money, childrenCount, name, age, gender);

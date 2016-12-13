@@ -9,6 +9,7 @@ namespace God
         public Student(string patronymic, string name, int age, Gender gender)
             : base(name, age, gender)
         {
+            if (patronymic == null) throw new ArgumentNullException();
             Patronymic = patronymic;
             PrintColour = ColorHelper.ParseColor(Resource.StudentColor);
         }
