@@ -1,4 +1,5 @@
 ﻿using System;
+using God.Helpers;
 
 namespace God
 {
@@ -11,7 +12,7 @@ namespace God
             : base(patronymic, name, age, gender)
         {
             AverageRating = averageRating > MinRate ? averageRating : MinRate;
-            PrintColour = ConsoleColor.Yellow;
+            PrintColour = ColorHelper.ParseColor(Resource.BotanColor);
         }
        
         public override string ToString()

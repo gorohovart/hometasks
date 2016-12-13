@@ -1,4 +1,5 @@
 ﻿using System;
+using God.Helpers;
 
 namespace God
 {
@@ -10,7 +11,7 @@ namespace God
             : base(childrenCount, name, age, gender)
         {
             MoneyCount = moneyCount > 0 ? moneyCount : 0;
-            PrintColour = ConsoleColor.Green;
+            PrintColour = ColorHelper.ParseColor(Resource.CoolParentColor);
         }       
 
         public override string ToString()

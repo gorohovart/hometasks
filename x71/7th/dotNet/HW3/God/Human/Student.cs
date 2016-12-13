@@ -1,4 +1,5 @@
 ﻿using System;
+using God.Helpers;
 
 namespace God
 {
@@ -9,7 +10,7 @@ namespace God
             : base(name, age, gender)
         {
             Patronymic = patronymic;
-            PrintColour = ConsoleColor.Red;
+            PrintColour = ColorHelper.ParseColor(Resource.StudentColor);
         }
 
         public override string ToString()

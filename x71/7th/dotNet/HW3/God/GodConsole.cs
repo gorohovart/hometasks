@@ -5,18 +5,18 @@ namespace God
 {
     internal sealed class GodConsole
     {
-        private readonly God God;
-        private readonly PrintHelper PrintHelper;
+        private readonly God _god;
+        private readonly PrintHelper _printHelper;
 
         public GodConsole()
         {
-            God = new God();
-            PrintHelper = new PrintHelper();
+            _god = new God();
+            _printHelper = new PrintHelper();
         }
 
         public void Run()
         {
-            if (!CheckDate())
+            if (!SundayCheck())
             {
                 Console.WriteLine(Resource.SundayError);
                 return;
@@ -30,7 +30,7 @@ namespace God
                 Console.WriteLine(Resource.InputError);
             }
 
-            PrintHelper.PrintColourInfo();
+            _printHelper.PrintColourInfo();
 
             for (var i = 0; i < humansCount; i++)
             {
@@ -38,32 +38,32 @@ namespace God
                 switch (i)
                 {
                     case 0:
-                        human = God.CreateHuman(Gender.Male);
+                        human = _god.CreateHuman(Gender.Male);
                         break;
                     case 1:
-                        human = God.CreateHuman(Gender.Female);
+                        human = _god.CreateHuman(Gender.Female);
                         break;
                     default:
-                        human = God.CreateHuman();
+                        human = _god.CreateHuman();
                         break;
                 }
 
-                PrintHelper.PrintHuman(human);
+                _printHelper.PrintHuman(human);
 
-                var pair = God.CreatePair(human);
-                PrintHelper.PrintPair(pair);
+                var pair = _god.CreatePair(human);
+
+                _printHelper.PrintPair(pair);
+
+                Console.WriteLine(string.Empty);
             }
-            var god = _god as God;
-            if (god == null) return;
-
-            var money = god.GetAllMoney();
+            var money = _god.GetAllMoney();
             MoneyPrinter.PrintTotalMoney(money);
         }
 
-        private static bool CheckDate()
+        private static bool SundayCheck()
         {
             var date = DateTime.Now;
-            return date.DayOfWeek != DayOfWeek.Sunday;
+            return true; //date.DayOfWeek != DayOfWeek.Sunday;
         }
 
         

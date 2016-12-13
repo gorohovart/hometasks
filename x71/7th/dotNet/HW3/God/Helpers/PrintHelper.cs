@@ -1,5 +1,6 @@
 ﻿using System;
-namespace God
+
+namespace God.Helpers
 {
     internal sealed class PrintHelper
     {
@@ -16,7 +17,7 @@ namespace God
             var coolParent = human as CoolParent;
             if (coolParent != null)
             {
-                Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.BackgroundColor = ColorHelper.ParseColor(Resource.MoneyBackgroundColor);
                 Console.Write(coolParent.MoneyCount.ToString("C"));
             }
             Console.WriteLine(string.Empty);
@@ -25,29 +26,30 @@ namespace God
 
         public void PrintPair(Human pair)
         {
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.BackgroundColor = ColorHelper.ParseColor(Resource.PairBackgroundColor);
             PrintHuman(pair);
             Console.BackgroundColor = ConsoleColor.Black;
         }
 
         public void PrintColourInfo()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
+
+            Console.ForegroundColor = ColorHelper.ParseColor(Resource.ParentColor); 
             Console.Write(Resource.Parents);
 
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(" " + Resource.Students);
+            Console.ForegroundColor = ColorHelper.ParseColor(Resource.StudentColor);
+            Console.Write(@" " + Resource.Students);
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(" " + Resource.Botans);
+            Console.ForegroundColor = ColorHelper.ParseColor(Resource.BotanColor);
+            Console.Write(@" " + Resource.Botans);
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(" " + Resource.CoolParents);
+            Console.ForegroundColor = ColorHelper.ParseColor(Resource.CoolParentColor);
+            Console.Write(@" " + Resource.CoolParents);
 
             Console.WriteLine(string.Empty);
 
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine(Resource.OutputFileName + " " + Resource.TotalMoneyGreeting);
+            Console.WriteLine(Resource.OutputFileName + @" " + Resource.TotalMoneyGreeting);
 
             Console.WriteLine(string.Empty);
         }
