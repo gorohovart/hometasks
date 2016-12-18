@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace God.Helpers
 {
-    internal sealed class MoneyPrinter
+    public sealed class MoneyPrinter
     {
         private const string Path = @"TotalMoney.txt";
         public static void PrintTotalMoney(int money)

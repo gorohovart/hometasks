@@ -1,4 +1,6 @@
-﻿namespace God
+﻿using God;
+
+namespace task3
 {
     internal sealed class Program
     {

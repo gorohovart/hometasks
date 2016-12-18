@@ -22,7 +22,7 @@ namespace God {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource {
+    public class Resource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace God {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("God.Resource", typeof(Resource).Assembly);
@@ -51,7 +51,7 @@ namespace God {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Возраст.
         /// </summary>
-        internal static string Age {
+        public static string Age {
             get {
                 return ResourceManager.GetString("Age", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Средняя оценка.
         /// </summary>
-        internal static string AvgScore {
+        public static string AvgScore {
             get {
                 return ResourceManager.GetString("AvgScore", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Yellow.
         /// </summary>
-        internal static string BotanColor {
+        public static string BotanColor {
             get {
                 return ResourceManager.GetString("BotanColor", resourceCulture);
             }
@@ -90,16 +90,25 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Ботаны.
         /// </summary>
-        internal static string Botans {
+        public static string Botans {
             get {
                 return ResourceManager.GetString("Botans", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ура! Ребёнок .
+        /// </summary>
+        public static string ChildBorn {
+            get {
+                return ResourceManager.GetString("ChildBorn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Количество детей.
         /// </summary>
-        internal static string ChildrenCount {
+        public static string ChildrenCount {
             get {
                 return ResourceManager.GetString("ChildrenCount", resourceCulture);
             }
@@ -108,7 +117,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to DarkGreen.
         /// </summary>
-        internal static string CoolParentColor {
+        public static string CoolParentColor {
             get {
                 return ResourceManager.GetString("CoolParentColor", resourceCulture);
             }
@@ -117,16 +126,25 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Крутые предки.
         /// </summary>
-        internal static string CoolParents {
+        public static string CoolParents {
             get {
                 return ResourceManager.GetString("CoolParents", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Симпатия не взаимна :&apos;(.
+        /// </summary>
+        public static string DontLike {
+            get {
+                return ResourceManager.GetString("DontLike", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Женщина.
         /// </summary>
-        internal static string Female {
+        public static string Female {
             get {
                 return ResourceManager.GetString("Female", resourceCulture);
             }
@@ -135,9 +153,18 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Пол.
         /// </summary>
-        internal static string Gender {
+        public static string Gender {
             get {
                 return ResourceManager.GetString("Gender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Magenta.
+        /// </summary>
+        public static string Girl {
+            get {
+                return ResourceManager.GetString("Girl", resourceCulture);
             }
         }
         
@@ -145,16 +172,25 @@ namespace God {
         ///   Looks up a localized string similar to Добрый день. Вы используете консоль бога.
         ///Сколько людей вы хотите сотворить?.
         /// </summary>
-        internal static string Greeting {
+        public static string Greeting {
             get {
                 return ResourceManager.GetString("Greeting", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Здравствуйте!.
+        /// </summary>
+        public static string Hello {
+            get {
+                return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Вы ввели некорректное число. Попробуйте еще раз.
         /// </summary>
-        internal static string InputError {
+        public static string InputError {
             get {
                 return ResourceManager.GetString("InputError", resourceCulture);
             }
@@ -163,7 +199,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Мужчина.
         /// </summary>
-        internal static string Male {
+        public static string Male {
             get {
                 return ResourceManager.GetString("Male", resourceCulture);
             }
@@ -172,7 +208,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Количество денег.
         /// </summary>
-        internal static string MoneyAmount {
+        public static string MoneyAmount {
             get {
                 return ResourceManager.GetString("MoneyAmount", resourceCulture);
             }
@@ -181,7 +217,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to DarkRed.
         /// </summary>
-        internal static string MoneyBackgroundColor {
+        public static string MoneyBackgroundColor {
             get {
                 return ResourceManager.GetString("MoneyBackgroundColor", resourceCulture);
             }
@@ -190,7 +226,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Имя.
         /// </summary>
-        internal static string Name {
+        public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
             }
@@ -199,7 +235,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to totalMoney.txt.
         /// </summary>
-        internal static string OutputFileName {
+        public static string OutputFileName {
             get {
                 return ResourceManager.GetString("OutputFileName", resourceCulture);
             }
@@ -208,7 +244,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to DarkGray.
         /// </summary>
-        internal static string PairBackgroundColor {
+        public static string PairBackgroundColor {
             get {
                 return ResourceManager.GetString("PairBackgroundColor", resourceCulture);
             }
@@ -217,7 +253,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to DarkBlue.
         /// </summary>
-        internal static string ParentColor {
+        public static string ParentColor {
             get {
                 return ResourceManager.GetString("ParentColor", resourceCulture);
             }
@@ -226,7 +262,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Родители.
         /// </summary>
-        internal static string Parents {
+        public static string Parents {
             get {
                 return ResourceManager.GetString("Parents", resourceCulture);
             }
@@ -235,16 +271,35 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Отчество.
         /// </summary>
-        internal static string Patronymic {
+        public static string Patronymic {
             get {
                 return ResourceManager.GetString("Patronymic", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Нажмите Enter чтобы устроить свиданку,
+        ///Q или Escape чтобы покинуть нас..
+        /// </summary>
+        public static string PressButton {
+            get {
+                return ResourceManager.GetString("PressButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Одинаковый пол!.
+        /// </summary>
+        public static string SameGenderError {
+            get {
+                return ResourceManager.GetString("SameGenderError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Red.
         /// </summary>
-        internal static string StudentColor {
+        public static string StudentColor {
             get {
                 return ResourceManager.GetString("StudentColor", resourceCulture);
             }
@@ -253,7 +308,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Суденты.
         /// </summary>
-        internal static string Students {
+        public static string Students {
             get {
                 return ResourceManager.GetString("Students", resourceCulture);
             }
@@ -262,7 +317,7 @@ namespace God {
         /// <summary>
         ///   Looks up a localized string similar to Извините, сегодня воскресение. Сотворить людей не получится!.
         /// </summary>
-        internal static string SundayError {
+        public static string SundayError {
             get {
                 return ResourceManager.GetString("SundayError", resourceCulture);
             }
@@ -272,7 +327,7 @@ namespace God {
         ///   Looks up a localized string similar to находящийся рядом с исполняемым файлом
         ///и содержит суммарные деньги крутых предков..
         /// </summary>
-        internal static string TotalMoneyGreeting {
+        public static string TotalMoneyGreeting {
             get {
                 return ResourceManager.GetString("TotalMoneyGreeting", resourceCulture);
             }

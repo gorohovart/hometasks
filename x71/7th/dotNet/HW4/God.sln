@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "God", "God\God.csproj", "{B38B7A91-C96B-4C39-8784-554063DDEA60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "task4", "task4\task4.csproj", "{6754A847-2AD2-4933-AE79-B8DE12437C33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "task3", "task3\task3.csproj", "{C6E1A6FB-647A-4327-93FA-61C6D043DFDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoupleTest", "UnitTestProject1\CoupleTest.csproj", "{AE693C94-48C6-49F5-8337-9F22591EC271}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{B38B7A91-C96B-4C39-8784-554063DDEA60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B38B7A91-C96B-4C39-8784-554063DDEA60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B38B7A91-C96B-4C39-8784-554063DDEA60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6754A847-2AD2-4933-AE79-B8DE12437C33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6754A847-2AD2-4933-AE79-B8DE12437C33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6754A847-2AD2-4933-AE79-B8DE12437C33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6754A847-2AD2-4933-AE79-B8DE12437C33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6E1A6FB-647A-4327-93FA-61C6D043DFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6E1A6FB-647A-4327-93FA-61C6D043DFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6E1A6FB-647A-4327-93FA-61C6D043DFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6E1A6FB-647A-4327-93FA-61C6D043DFDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE693C94-48C6-49F5-8337-9F22591EC271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE693C94-48C6-49F5-8337-9F22591EC271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE693C94-48C6-49F5-8337-9F22591EC271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE693C94-48C6-49F5-8337-9F22591EC271}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

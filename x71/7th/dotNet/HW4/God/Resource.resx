@@ -129,6 +129,9 @@
   <data name="Botans" xml:space="preserve">
     <value>Ботаны</value>
   </data>
+  <data name="ChildBorn" xml:space="preserve">
+    <value>Ура! Ребёнок </value>
+  </data>
   <data name="ChildrenCount" xml:space="preserve">
     <value>Количество детей</value>
   </data>
@@ -138,15 +141,24 @@
   <data name="CoolParents" xml:space="preserve">
     <value>Крутые предки</value>
   </data>
+  <data name="DontLike" xml:space="preserve">
+    <value>Симпатия не взаимна :'(</value>
+  </data>
   <data name="Female" xml:space="preserve">
     <value>Женщина</value>
   </data>
   <data name="Gender" xml:space="preserve">
     <value>Пол</value>
   </data>
+  <data name="Girl" xml:space="preserve">
+    <value>Magenta</value>
+  </data>
   <data name="Greeting" xml:space="preserve">
     <value>Добрый день. Вы используете консоль бога.
 Сколько людей вы хотите сотворить?</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Здравствуйте!</value>
   </data>
   <data name="InputError" xml:space="preserve">
     <value>Вы ввели некорректное число. Попробуйте еще раз</value>
@@ -177,6 +189,13 @@
   </data>
   <data name="Patronymic" xml:space="preserve">
     <value>Отчество</value>
+  </data>
+  <data name="PressButton" xml:space="preserve">
+    <value>Нажмите Enter чтобы устроить свиданку,
+Q или Escape чтобы покинуть нас.</value>
+  </data>
+  <data name="SameGenderError" xml:space="preserve">
+    <value>Одинаковый пол!</value>
   </data>
   <data name="StudentColor" xml:space="preserve">
     <value>Red</value>

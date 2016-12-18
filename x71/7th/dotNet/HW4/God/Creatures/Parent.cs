@@ -1,16 +1,16 @@
-﻿using System;
+﻿using God.Enums;
 using God.Helpers;
 
-namespace God
+namespace God.Creatures
 {
-    internal class Parent : Human
+    public class Parent : Human
     {
         public int ChildrenCount { get; }
-        public Parent(int childrenCount, string name, int age, Gender gender)
-            : base(name, age, gender)
+        public Parent(int childrenCount, string name, string patronymic, int age, Gender gender)
+            : base(name, patronymic, age, gender)
         {
             ChildrenCount = childrenCount > 0 ? childrenCount : 0;
-            PrintColour = ColorHelper.ParseColor(Resource.ParentColor);
+            PrintColor = ColorHelper.ParseColor(Resource.ParentColor);
 
         }
         

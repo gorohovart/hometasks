@@ -1,4 +1,6 @@
 ﻿using System;
+using God.Creatures;
+using God.Enums;
 using God.Helpers;
 
 namespace God
@@ -63,7 +65,7 @@ namespace God
         private static bool SundayCheck()
         {
             var date = DateTime.Now;
-            return date.DayOfWeek != DayOfWeek.Sunday;
+            return true; //date.DayOfWeek != DayOfWeek.Sunday;
         }
 
         

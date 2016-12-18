@@ -1,22 +1,26 @@
-﻿using System;
+﻿using God.Atributes;
+using God.Enums;
 using God.Helpers;
 
-namespace God
+namespace God.Creatures
 {
-    internal sealed class Botan : Student
+    [Couple("Girl", 0.7, "SmartGirl")]
+    [Couple("PrettyGirl", 1, "PrettyGirl")]
+    [Couple("SmartGirl", 0.8, "Book")]
+    public sealed class Botan : Student
     {
         private const float MinRate = 3;
         public double AverageRating { get; }
         private string AverageRatingToString()
         {
-            return string.Format("{0:0.##}", AverageRating);
+            return $"{AverageRating:0.##}";
         }
 
-        public Botan(double averageRating, string patronymic, string name, int age, Gender gender)
-            : base(patronymic, name, age, gender)
+        public Botan(string name, string patronymic, double averageRating)
+            : base(name, patronymic)
         {
             AverageRating = averageRating > MinRate ? averageRating : MinRate;
-            PrintColour = ColorHelper.ParseColor(Resource.BotanColor);
+            PrintColor = ColorHelper.ParseColor(Resource.BotanColor);
         }
        
         public override string ToString()

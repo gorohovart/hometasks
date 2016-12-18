@@ -1,4 +1,4 @@
-﻿namespace God
+﻿namespace God.Enums
 {
     public enum HumanType
     {

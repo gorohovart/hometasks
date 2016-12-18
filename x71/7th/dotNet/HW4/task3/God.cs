@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using God.Creatures;
+using God.Enums;
 using God.Helpers;
 
 namespace God
@@ -121,17 +123,17 @@ namespace God
 
         private Student CreateStudent(string name, Gender gender, string _patronymic = null)
         {
-            var age = Helper.GetStudentRandomAge();
+            var age = Helper.GetRandomAge();
             var patronymic = _patronymic == null
                 ? Helper.GetRandomPatronymic(gender)
                 : _patronymic;
 
-            return new Student(patronymic, name, age, gender);
+            return new Student(name, patronymic);
         }
 
         private Botan CreateBotan(string name, Gender gender, string _patronymic = null, int? money = null)
         {
-            var age = Helper.GetStudentRandomAge();
+            var age = Helper.GetRandomAge();
             var patronymic = _patronymic == null
                 ? Helper.GetRandomPatronymic(gender)
                 : _patronymic;
@@ -139,7 +141,7 @@ namespace God
                 ? Helper.GetRandomAverageRating()
                 : Helper.GetAvgRatingByMoney(money.Value);
 
-            return new Botan(averageRating, patronymic, name, age, gender);
+            return new Botan(name, patronymic, averageRating);
         }
 
         private Parent CreateParent(string name, Gender gender)

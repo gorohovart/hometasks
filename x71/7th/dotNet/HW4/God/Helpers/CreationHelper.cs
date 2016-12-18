@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using God.Creatures;
+using God.Enums;
 
 namespace God.Helpers
 {
-    internal sealed class CreationHelper
+    public sealed class CreationHelper
     {
         private readonly List<string> _manNames = new List<string> { "Егор", "Владимир", "Петр", "Константин", "Иван", "Семен" };
         private readonly List<string> _womanNames = new List<string> { "Вика", "Светлана", "Татьяна", "Валентина", "Екатерина" };
@@ -25,13 +27,27 @@ namespace God.Helpers
             return patronymic?.Substring(0, patronymic.Length - PatronymicEndLength) ?? string.Empty;
         }
 
+        public string GetPatronymicByParentsAndGender(Human human1, Human human2, Gender gender)
+        {
+            if (human1 == null) throw new ArgumentNullException(nameof(human1));
+            if (human2 == null) throw new ArgumentNullException(nameof(human2));
+
+            string fatherName;
+            if (human1.Gender == Gender.Male)
+                fatherName = human1.Name;
+            else
+                fatherName = human2.Name;
+
+            return GetPatronymicByName(fatherName, gender);
+        }
+
         public string GetPatronymicByParent(Parent parent, Gender gender)
         {
             if (parent == null) throw new NullReferenceException();
             return parent.Gender == Gender.Female ? GetRandomPatronymic(gender) : GetPatronymicByName(parent.Name, gender);
         }
 
-        public int GetStudentRandomAge()
+        public int GetRandomAge()
         {
             const int minAge = 15;
             const int maxAge = 25;
@@ -98,6 +114,32 @@ namespace God.Helpers
         public double GetAvgRatingByMoney(int money)
         {
             return Math.Log10(money);
+        }
+
+        private HumanTypeForDate GetRandomHumanTypeForDate()
+        {
+            var humanTypesCount = Enum.GetNames(typeof(HumanTypeForDate)).Length;
+            var rnd = _random.Next(0, humanTypesCount);
+            return (HumanTypeForDate)rnd;
+        }
+        public Human GetRandomHumanForDate()
+        {
+            var humanType = GetRandomHumanTypeForDate();
+            switch (humanType)
+            {
+                case HumanTypeForDate.Student:
+                    return new Student(GetRandomName(Gender.Male), GetRandomPatronymic(Gender.Male));
+                case HumanTypeForDate.Botan:
+                    return new Botan(GetRandomName(Gender.Male), GetRandomPatronymic(Gender.Male), GetRandomAverageRating());
+                case HumanTypeForDate.Girl:
+                    return new Girl(GetRandomName(Gender.Female), GetRandomPatronymic(Gender.Female));
+                case HumanTypeForDate.SmartGirl:
+                    return new SmartGirl(GetRandomName(Gender.Female), GetRandomPatronymic(Gender.Female));
+                case HumanTypeForDate.PrettyGirl:
+                    return new PrettyGirl(GetRandomName(Gender.Female), GetRandomPatronymic(Gender.Female));
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

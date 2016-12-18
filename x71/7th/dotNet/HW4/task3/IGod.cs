@@ -1,4 +1,7 @@
-﻿namespace God
+﻿using God.Creatures;
+using God.Enums;
+
+namespace God
 {
     internal interface IGod
     {
