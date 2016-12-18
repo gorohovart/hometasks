@@ -2,19 +2,20 @@
 
 namespace Regexp
 {
-    private sealed class Program
+    public sealed class Program
     {
-        private static void PrintCheckSucceed(string what)
+        public static void PrintCheckSucceed(string stringName, string what)
         {
+            if ((what == null)||(stringName == null)) throw new ArgumentNullException();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("String is " + what + "!");
+            Console.WriteLine(String.Format("Line \"{0}\" is {1}!",stringName, what));
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        private static void PrintCheckFailed()
+        public static void PrintCheckFailed(string str)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Check failed");
+            Console.WriteLine(string.Format("Check of string \"{0}\" failed", str));
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
@@ -26,23 +27,23 @@ namespace Regexp
 
             if (UserInputChecker.IsZip(line))
             {
-                CheckSucceed("ZIP");
+                PrintCheckSucceed(line, "a ZIP");
             }
             else if (UserInputChecker.IsPhoneNumber(line))
             {
-                CheckSucceed("phone number");
+                PrintCheckSucceed(line, "a phone number");
             }
             else if (UserInputChecker.IsEmergencyPhoneNumber(line))
             {
-                PrintCheckSucceed("emergency phone number");
+                PrintCheckSucceed(line, "an emergency phone number");
             }
             else if (UserInputChecker.IsEmail(line))
             {
-                CheckSucceed("email");
+                PrintCheckSucceed(line, "an email");
             }
             else
             {
-                PrintCheckFailed();
+                PrintCheckFailed(line);
             }
         }
     }

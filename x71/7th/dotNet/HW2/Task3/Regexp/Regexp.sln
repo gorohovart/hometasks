@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regexp", "Regexp\Regexp.csp
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UserInputChecker", "UserInputChecker\UserInputChecker.fsproj", "{1F7A5F2B-7C5D-4D2E-8870-60AEA68780E8}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "UserInputCheckerTest", "UserInputCheckerTest\UserInputCheckerTest.fsproj", "{0E3DA734-CA33-445B-A494-36792C22DA06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1F7A5F2B-7C5D-4D2E-8870-60AEA68780E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F7A5F2B-7C5D-4D2E-8870-60AEA68780E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F7A5F2B-7C5D-4D2E-8870-60AEA68780E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E3DA734-CA33-445B-A494-36792C22DA06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E3DA734-CA33-445B-A494-36792C22DA06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E3DA734-CA33-445B-A494-36792C22DA06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E3DA734-CA33-445B-A494-36792C22DA06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
