@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading;
 using Exam.Helpers;
 
-namespace Exam
+namespace Exam.Models
 {
     internal sealed class Student
     {
+        private static int CurrentNumberToGive = 1;
         public string Name { get; }
         public int Mark { get; private set; }
         private readonly DeanOffice _deanOffice;
+        public readonly int TicketNumber;
         public Student(DeanOffice deanOffice)
         {
             _deanOffice = deanOffice;
             Name = Randomizer.GetStudentName();
+            TicketNumber = CurrentNumberToGive++;
         }
 
         public void Initialize()
@@ -25,10 +23,7 @@ namespace Exam
             ExamStarted();
 
         }
-        public void PassExam(int mark)
-        {
-            Mark = mark;
-        }
+        public void PassExam(int mark) => Mark = mark;
 
         private void ExamStarted()
         {
@@ -36,9 +31,6 @@ namespace Exam
             _deanOffice.PassExam(this);
         }
 
-        private void GoToUniver()
-        {
-            Thread.Sleep(Randomizer.GetRandomTime(10));
-        }
+        private void GoToUniver() => Thread.Sleep(Randomizer.GetRandomTime(10));
     }
 }

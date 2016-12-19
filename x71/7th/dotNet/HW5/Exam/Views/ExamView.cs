@@ -1,24 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Exam.Models;
+using Exam.Properties;
 
 namespace Exam.Views
 {
-    internal partial class ExamView : Form, IExamView
+    internal sealed partial class ExamView : Form, IExamView
     {
+        private int _currentProgress;
+        private int _studentsAmount;
         public event EventHandler ExamStarted;
-        public void AddStudentName(Student student)
+
+        public ExamView()
         {
-            resultsListView.Items.Add(new ListViewItem(new[] { resultsListView.Items.Count.ToString(), student.Name, "" }));
+            InitializeComponent();
+            AddColumnsListView();
+            this.SizeChanged += OnFormSizeChanges;
+
+            StartButton.Click += OnButtonStartClick;
+
+            StartButtonUpdateState(StartButtonSize.First);
+
+            progressBarLabel.AutoSize = false;
+            progressBarLabel.Width = 20;
+            progressBarLabel.TextAlign = ContentAlignment.MiddleCenter;
+            progressBarLabel.Location = new Point((ClientSize.Width - progressBarLabel.Width)/2, 305);
         }
 
-        private void InvokeIfRequired(Action action, Control control)
+        private void Action(Action action, ISynchronizeInvoke control)
         {
             if (control.InvokeRequired)
             {
@@ -29,70 +40,105 @@ namespace Exam.Views
                 action();
             }
         }
+
+        public void AddStudentToList(Student student)
+        {
+            Action(() => resultsListView.Items.Add(
+                new ListViewItem(new[] {$"{student.TicketNumber}", student.Name, ""})), resultsListView);
+        }
+
         public void ShowStudentMarkAndUpdateProgress(Student student)
         {
-            if (student == null || student.Mark < 2 || student.Mark > 5)
+            Action(() =>
             {
-                throw new ArgumentOutOfRangeException();
-            }
-            foreach (ListViewItem item in resultsListView.Items)
-            {
-                if ((item != null) && (item.SubItems[1].Name == student.Name))
+                if (student == null || student.Mark < 2 || student.Mark > 5)
                 {
-                    item.SubItems[2].Name = student.Mark.ToString();
+                    throw new ArgumentOutOfRangeException();
                 }
-            }
-            examProgressBar.PerformStep();
+                foreach (ListViewItem item in resultsListView.Items)
+                {
+                    if ((item != null) && (item.SubItems[0].Text == student.TicketNumber.ToString()))
+                    {
+                        item.SubItems[2].Text = student.Mark.ToString();
+                    }
+                }
+            }, resultsListView);
+            Action(ProgressBarStep, examProgressBar);
         }
 
         public void FinishExam()
         {
-            StartButton.Enabled = true;
+            Action(() =>
+            {
+                StartButtonUpdateState(StartButtonSize.Next);
+            }, StartButton);
+            MessageBox.Show(Resource.ExamFinished);
+        }
+
+        private void ResetProgress() => SetProgressBarMaxValue(_studentsAmount);
+
+        private void ProgressBarStep()
+        {
+            progressBarLabel.Text = $"{++_currentProgress}/{_studentsAmount}";
+            examProgressBar.PerformStep();
         }
 
         public void SetProgressBarMaxValue(int max)
         {
-            examProgressBar.Maximum = max;
+            _currentProgress = 0;
+            _studentsAmount = max;
+            examProgressBar.Value = 0;
+            examProgressBar.Maximum = _studentsAmount;
+            progressBarLabel.Text = $"0/{max}";
         }
 
-        public ExamView()
-        {
-            InitializeComponent();
-            AddColumnsListView();
-            this.SizeChanged += OnFormSizeChanges;
-            StartButton.Click += OnButtonStartClick;
-        }
+        private void OnFormSizeChanges(object sender, EventArgs e) => Action(AddColumnsListView, resultsListView);
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void OnFormSizeChanges(object sender, EventArgs e)
-        {
-            AddColumnsListView();
-        }
         private void OnButtonStartClick(object sender, EventArgs e)
         {
-            StartButton.Enabled = false;
+            ResetProgress();
+            StartButtonUpdateState(StartButtonSize.InProgress);
             examProgressBar.Value = 0;
             resultsListView.Items.Clear();
             resultsListView.Refresh();
             ExamStarted?.Invoke(this, EventArgs.Empty);
         }
-        
+
+        private void StartButtonUpdateState(StartButtonSize size)
+        {
+            switch (size)
+            {
+                case StartButtonSize.First:
+                    StartButton.Enabled = true;
+                    StartButton.Text = Resource.StartButtonStartExam;
+                    break;
+                case StartButtonSize.InProgress:
+                    StartButton.Enabled = false;
+                    StartButton.Text = Resource.StartButtonExamInProgress;
+                    break;
+                case StartButtonSize.Next:
+                    StartButton.Enabled = true;
+                    StartButton.Text = Resource.StartNextExam;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(size), size, null);
+            }
+            StartButton.Width = (int) size;
+            StartButton.Location = new Point((ClientSize.Width - StartButton.Width)/2, 333);
+        }
+
         private void AddColumnsListView()
         {
             var width = resultsListView.Size.Width;
-            var numWidth = width / 10 * 2 -1;
-            var nameWidth = width / 10 * 6 - 1;
-            var markWidth = width / 10 * 2 - 1;
+            var numWidth = width/100*25;
+            var nameWidth = width/100*45;
+            var markWidth = width/100*30;
 
             if (resultsListView.Columns.Count == 0)
             {
-                resultsListView.Columns.Add("#", numWidth, HorizontalAlignment.Center);
-                resultsListView.Columns.Add("Имя студента", nameWidth, HorizontalAlignment.Center);
-                resultsListView.Columns.Add("Оценка", markWidth, HorizontalAlignment.Center);
+                resultsListView.Columns.Add(Resource.TicketNumber, numWidth, HorizontalAlignment.Center);
+                resultsListView.Columns.Add(Resource.StudentName, nameWidth, HorizontalAlignment.Center);
+                resultsListView.Columns.Add(Resource.Mark, markWidth, HorizontalAlignment.Center);
             }
             else
             {
@@ -103,14 +149,5 @@ namespace Exam.Views
             resultsListView.Refresh();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ExamView_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

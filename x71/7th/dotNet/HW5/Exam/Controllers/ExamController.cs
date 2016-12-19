@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using Exam.Helpers;
+using Exam.Models;
 using Exam.Views;
 
 namespace Exam.Controllers
@@ -13,6 +11,10 @@ namespace Exam.Controllers
     {
         private readonly IExamView _view;
         private readonly int _numberOfStudents;
+        private readonly object _lock = new object();
+        private readonly List<Student> _studentsList = new List<Student>();
+        private int _passedExamAmount;
+        private readonly DeanOffice _deanOffice = new DeanOffice();
 
         public ExamController(IExamView view)
         {
@@ -20,30 +22,42 @@ namespace Exam.Controllers
             view.ExamStarted += OnExamStarted;
             _numberOfStudents = Randomizer.GetNumberOfStudents();
             view.SetProgressBarMaxValue(_numberOfStudents);
+
+            _deanOffice.StudentComeEventHandler += OnStudentCome;
+            _deanOffice.StudentPassExamEventHandler += OnStudentPassedExam;
+
+            for (var i = 1; i <= _numberOfStudents; i++)
+            {
+                _studentsList.Add(new Student(_deanOffice));
+            }
         }
 
-        private void OnStudentCome(object sender, EventArgs e)
-        {
-            _view.AddStudentName((Student) sender);
-        }
+        //private void OnFormClosed(object sender, EventArgs e) => Environment.Exit(Environment.ExitCode);
+
+        private void OnStudentCome(object sender, EventArgs e) => _view.AddStudentToList((Student) sender);
 
         private void OnStudentPassedExam(object sender, EventArgs e)
         {
             _view.ShowStudentMarkAndUpdateProgress((Student)sender);
+            lock (_lock)
+            {
+                _passedExamAmount = _passedExamAmount + 1;
+                if (_passedExamAmount == _numberOfStudents)
+                {
+                    _view.FinishExam();
+                }
+            }
         }
 
         private void OnExamStarted(object sender, EventArgs e)
         {
-            var deanOffice = new DeanOffice();
-            deanOffice.StudentComeEventHandler += OnStudentCome;
-            deanOffice.StudentPassExamEventHandler += OnStudentPassedExam;
+            _passedExamAmount = 0;
 
-            for (int i = 1; i <= _numberOfStudents; i++)
+            foreach (var student in _studentsList)
             {
-                new Thread(new Student(deanOffice).Initialize).Start();
+                new Thread(student.Initialize).Start();
             }
-
-            deanOffice.StartExam();
+            _deanOffice.StartExam();
         }
     }
 }

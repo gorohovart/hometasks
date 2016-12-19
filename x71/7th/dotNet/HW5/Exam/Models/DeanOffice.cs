@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using Exam.Helpers;
 
-namespace Exam
+namespace Exam.Models
 {
     internal sealed class DeanOffice
     {
@@ -20,10 +16,7 @@ namespace Exam
         }
 
         public ManualResetEvent ExamStartedEvent { get; }
-        public void StartExam()
-        {
-            ExamStartedEvent.Set();
-        }
+        public void StartExam() => ExamStartedEvent.Set();
 
         public void PassExam(Student student)
         {
