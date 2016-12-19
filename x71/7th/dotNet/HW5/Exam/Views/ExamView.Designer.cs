@@ -28,44 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.resultsListView = new System.Windows.Forms.ListView();
+            this.StartButton = new System.Windows.Forms.Button();
+            this.examProgressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
-            // listView1
+            // resultsListView
             // 
-            this.listView1.Location = new System.Drawing.Point(3, 1);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(269, 235);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.resultsListView.Location = new System.Drawing.Point(3, 1);
+            this.resultsListView.Name = "resultsListView";
+            this.resultsListView.Size = new System.Drawing.Size(308, 288);
+            this.resultsListView.TabIndex = 0;
+            this.resultsListView.UseCompatibleStateImageBehavior = false;
+            this.resultsListView.View = System.Windows.Forms.View.Details;
             // 
-            // label1
+            // StartButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(71, 239);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.StartButton.Location = new System.Drawing.Point(120, 324);
+            this.StartButton.Name = "StartButton";
+            this.StartButton.Size = new System.Drawing.Size(75, 23);
+            this.StartButton.TabIndex = 2;
+            this.StartButton.Text = "button1";
+            this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // examProgressBar
+            // 
+            this.examProgressBar.Location = new System.Drawing.Point(3, 295);
+            this.examProgressBar.Name = "examProgressBar";
+            this.examProgressBar.Size = new System.Drawing.Size(308, 23);
+            this.examProgressBar.TabIndex = 3;
             // 
             // ExamView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.listView1);
+            this.ClientSize = new System.Drawing.Size(313, 349);
+            this.Controls.Add(this.examProgressBar);
+            this.Controls.Add(this.StartButton);
+            this.Controls.Add(this.resultsListView);
             this.Name = "ExamView";
             this.Text = "ExamView";
+            this.Load += new System.EventHandler(this.ExamView_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.MaximizeBox = false;
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListView resultsListView;
+        private System.Windows.Forms.Button StartButton;
+        private System.Windows.Forms.ProgressBar examProgressBar;
     }
 }
