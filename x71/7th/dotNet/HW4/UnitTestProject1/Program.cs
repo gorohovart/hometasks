@@ -5,14 +5,11 @@ using God.Helpers;
 
 namespace CoupleTest
 {
-    internal sealed class Program
+    internal static class Program
     {
-        private static void Main(string[] args)
-        {
-            TestEachToEach();
-        }
+        private static void Main(string[] args) => TestEachToEach();
 
-        private static Human[] _people =
+        private static readonly Human[] _people =
         {
             new Student("Артем", "Владимирович"),
             new Botan("Артем", "Александрович", 14.88),
