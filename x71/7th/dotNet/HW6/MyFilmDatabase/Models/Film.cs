@@ -29,7 +29,7 @@ namespace MyFilmDatabase.Models
         public virtual ObservableListSource<Person> Actors
         {
             get { return _actors; }
-            set { _directors = value; }
+            set { _actors = value; }
         }
 
         public virtual ObservableListSource<Person> Directors
@@ -37,6 +37,7 @@ namespace MyFilmDatabase.Models
             get { return _directors; }
             set { _directors = value; }
         }
+
         //public Film()
     }
 }

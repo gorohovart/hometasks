@@ -9,9 +9,12 @@ namespace MyFilmDatabase.Models
         public string Name { get; set; }
         public string LastName { get; set; }
 
-        public static implicit operator List<object>(Person v)
-        {
-            throw new NotImplementedException();
-        }
+        //public int FilmId { get; set; }
+        //public virtual Film Film { get; set; }
+
+        //public static implicit operator List<object>(Person v)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -1,6 +1,9 @@
-﻿namespace MyFilmDatabase
+﻿using System.Reflection;
+using MyFilmDatabase.Properties;
+
+namespace MyFilmDatabase.Views
 {
-    partial class Form1
+    partial class MainView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +32,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.personBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
+            this.filmBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.personBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.filmBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -43,14 +46,13 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.personBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
+            this.filmBindingNavigatorSaveItem = new System.Windows.Forms.ToolStripButton();
             this.filmDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.filmBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.actorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.actorsDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,24 +63,26 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.personBindingNavigator)).BeginInit();
-            this.personBindingNavigator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filmDataGridView)).BeginInit();
+            this.actorsLabel = new System.Windows.Forms.Label();
+            this.directorsLabel = new System.Windows.Forms.Label();
+            this.filmsLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.filmBindingNavigator)).BeginInit();
+            this.filmBindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filmBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filmDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.actorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.actorsDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.directorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.actorsDataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // personBindingNavigator
+            // filmBindingNavigator
             // 
-            this.personBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.personBindingNavigator.BindingSource = this.personBindingSource;
-            this.personBindingNavigator.CountItem = this.bindingNavigatorCountItem;
-            this.personBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
-            this.personBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.filmBindingNavigator.AddNewItem = this.bindingNavigatorAddNewItem;
+            this.filmBindingNavigator.BindingSource = this.filmBindingSource;
+            this.filmBindingNavigator.CountItem = this.bindingNavigatorCountItem;
+            this.filmBindingNavigator.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.filmBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
             this.bindingNavigatorSeparator,
@@ -90,17 +94,17 @@
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem,
-            this.personBindingNavigatorSaveItem});
-            this.personBindingNavigator.Location = new System.Drawing.Point(0, 0);
-            this.personBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.personBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.personBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.personBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.personBindingNavigator.Name = "personBindingNavigator";
-            this.personBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.personBindingNavigator.Size = new System.Drawing.Size(1101, 25);
-            this.personBindingNavigator.TabIndex = 0;
-            this.personBindingNavigator.Text = "bindingNavigator1";
+            this.filmBindingNavigatorSaveItem});
+            this.filmBindingNavigator.Location = new System.Drawing.Point(0, 0);
+            this.filmBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.filmBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.filmBindingNavigator.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.filmBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.filmBindingNavigator.Name = "filmBindingNavigator";
+            this.filmBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
+            this.filmBindingNavigator.Size = new System.Drawing.Size(943, 25);
+            this.filmBindingNavigator.TabIndex = 0;
+            this.filmBindingNavigator.Text = "bindingNavigator1";
             // 
             // bindingNavigatorAddNewItem
             // 
@@ -111,9 +115,9 @@
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
-            // personBindingSource
+            // filmBindingSource
             // 
-            this.personBindingSource.DataSource = typeof(MyFilmDatabase.Models.Person);
+            this.filmBindingSource.DataSource = typeof(MyFilmDatabase.Models.Film);
             // 
             // bindingNavigatorCountItem
             // 
@@ -191,14 +195,14 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // personBindingNavigatorSaveItem
+            // filmBindingNavigatorSaveItem
             // 
-            this.personBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.personBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("personBindingNavigatorSaveItem.Image")));
-            this.personBindingNavigatorSaveItem.Name = "personBindingNavigatorSaveItem";
-            this.personBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
-            this.personBindingNavigatorSaveItem.Text = "Save Data";
-            this.personBindingNavigatorSaveItem.Click += new System.EventHandler(this.personBindingNavigatorSaveItem_Click);
+            this.filmBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.filmBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("filmBindingNavigatorSaveItem.Image")));
+            this.filmBindingNavigatorSaveItem.Name = "filmBindingNavigatorSaveItem";
+            this.filmBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
+            this.filmBindingNavigatorSaveItem.Text = "Save Data";
+            this.filmBindingNavigatorSaveItem.Click += new System.EventHandler(this.filmBindingNavigatorSaveItem_Click);
             // 
             // filmDataGridView
             // 
@@ -211,9 +215,9 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn5});
             this.filmDataGridView.DataSource = this.filmBindingSource;
-            this.filmDataGridView.Location = new System.Drawing.Point(102, 156);
+            this.filmDataGridView.Location = new System.Drawing.Point(12, 49);
             this.filmDataGridView.Name = "filmDataGridView";
-            this.filmDataGridView.Size = new System.Drawing.Size(616, 220);
+            this.filmDataGridView.Size = new System.Drawing.Size(448, 220);
             this.filmDataGridView.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn1
@@ -221,39 +225,31 @@
             this.dataGridViewTextBoxColumn1.DataPropertyName = "FilmId";
             this.dataGridViewTextBoxColumn1.HeaderText = "FilmId";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
             // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "Title";
             this.dataGridViewTextBoxColumn2.HeaderText = "Title";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.DataPropertyName = "Country";
             this.dataGridViewTextBoxColumn3.HeaderText = "Country";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.DataPropertyName = "Year";
             this.dataGridViewTextBoxColumn4.HeaderText = "Year";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "ImagePath";
             this.dataGridViewTextBoxColumn5.HeaderText = "ImagePath";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // filmBindingSource
-            // 
-            this.filmBindingSource.DataSource = typeof(MyFilmDatabase.Models.Film);
             // 
             // actorsBindingSource
             // 
@@ -269,9 +265,9 @@
             this.dataGridViewTextBoxColumn7,
             this.dataGridViewTextBoxColumn8});
             this.actorsDataGridView.DataSource = this.actorsBindingSource;
-            this.actorsDataGridView.Location = new System.Drawing.Point(143, 489);
+            this.actorsDataGridView.Location = new System.Drawing.Point(496, 45);
             this.actorsDataGridView.Name = "actorsDataGridView";
-            this.actorsDataGridView.Size = new System.Drawing.Size(250, 220);
+            this.actorsDataGridView.Size = new System.Drawing.Size(346, 220);
             this.actorsDataGridView.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn6
@@ -279,21 +275,18 @@
             this.dataGridViewTextBoxColumn6.DataPropertyName = "PersonId";
             this.dataGridViewTextBoxColumn6.HeaderText = "PersonId";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.Visible = false;
             // 
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "Name";
             this.dataGridViewTextBoxColumn7.HeaderText = "Name";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn8
             // 
             this.dataGridViewTextBoxColumn8.DataPropertyName = "LastName";
             this.dataGridViewTextBoxColumn8.HeaderText = "LastName";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
             // 
             // directorsBindingSource
             // 
@@ -309,9 +302,9 @@
             this.dataGridViewTextBoxColumn10,
             this.dataGridViewTextBoxColumn11});
             this.actorsDataGridView1.DataSource = this.directorsBindingSource;
-            this.actorsDataGridView1.Location = new System.Drawing.Point(399, 489);
+            this.actorsDataGridView1.Location = new System.Drawing.Point(496, 288);
             this.actorsDataGridView1.Name = "actorsDataGridView1";
-            this.actorsDataGridView1.Size = new System.Drawing.Size(300, 220);
+            this.actorsDataGridView1.Size = new System.Drawing.Size(346, 220);
             this.actorsDataGridView1.TabIndex = 3;
             // 
             // dataGridViewTextBoxColumn9
@@ -319,39 +312,68 @@
             this.dataGridViewTextBoxColumn9.DataPropertyName = "PersonId";
             this.dataGridViewTextBoxColumn9.HeaderText = "PersonId";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.Visible = false;
             // 
             // dataGridViewTextBoxColumn10
             // 
             this.dataGridViewTextBoxColumn10.DataPropertyName = "Name";
             this.dataGridViewTextBoxColumn10.HeaderText = "Name";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn11
             // 
             this.dataGridViewTextBoxColumn11.DataPropertyName = "LastName";
             this.dataGridViewTextBoxColumn11.HeaderText = "LastName";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
             // 
-            // Form1
+            // actorsLabel
+            // 
+            this.actorsLabel.AutoSize = true;
+            this.actorsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.actorsLabel.Location = new System.Drawing.Point(493, 25);
+            this.actorsLabel.Name = "actorsLabel";
+            this.actorsLabel.Size = new System.Drawing.Size(57, 17);
+            this.actorsLabel.TabIndex = 4;
+            this.actorsLabel.Text = Resources.Actors;
+            // 
+            // directorsLabel
+            // 
+            this.directorsLabel.AutoSize = true;
+            this.directorsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.directorsLabel.Location = new System.Drawing.Point(493, 268);
+            this.directorsLabel.Name = "directorsLabel";
+            this.directorsLabel.Size = new System.Drawing.Size(75, 17);
+            this.directorsLabel.TabIndex = 5;
+            this.directorsLabel.Text = Resources.Directors;
+            // 
+            // filmsLabel
+            // 
+            this.filmsLabel.AutoSize = true;
+            this.filmsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.filmsLabel.Location = new System.Drawing.Point(13, 29);
+            this.filmsLabel.Name = "filmsLabel";
+            this.filmsLabel.Size = new System.Drawing.Size(46, 17);
+            this.filmsLabel.TabIndex = 6;
+            this.filmsLabel.Text = Resources.Films;
+            // 
+            // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1101, 778);
+            this.ClientSize = new System.Drawing.Size(943, 565);
+            this.Controls.Add(this.filmsLabel);
+            this.Controls.Add(this.directorsLabel);
+            this.Controls.Add(this.actorsLabel);
             this.Controls.Add(this.actorsDataGridView1);
             this.Controls.Add(this.actorsDataGridView);
             this.Controls.Add(this.filmDataGridView);
-            this.Controls.Add(this.personBindingNavigator);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.personBindingNavigator)).EndInit();
-            this.personBindingNavigator.ResumeLayout(false);
-            this.personBindingNavigator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.personBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.filmDataGridView)).EndInit();
+            this.Controls.Add(this.filmBindingNavigator);
+            this.Name = "MainView";
+            this.Text = "MainView";
+            ((System.ComponentModel.ISupportInitialize)(this.filmBindingNavigator)).EndInit();
+            this.filmBindingNavigator.ResumeLayout(false);
+            this.filmBindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.filmBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.filmDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.actorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.actorsDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.directorsBindingSource)).EndInit();
@@ -363,8 +385,8 @@
 
         #endregion
 
-        private System.Windows.Forms.BindingSource personBindingSource;
-        private System.Windows.Forms.BindingNavigator personBindingNavigator;
+        private System.Windows.Forms.BindingSource filmBindingSource;
+        private System.Windows.Forms.BindingNavigator filmBindingNavigator;
         private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
@@ -376,8 +398,7 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.ToolStripButton personBindingNavigatorSaveItem;
-        private System.Windows.Forms.BindingSource filmBindingSource;
+        private System.Windows.Forms.ToolStripButton filmBindingNavigatorSaveItem;
         private System.Windows.Forms.DataGridView filmDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -394,6 +415,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private System.Windows.Forms.Label actorsLabel;
+        private System.Windows.Forms.Label directorsLabel;
+        private System.Windows.Forms.Label filmsLabel;
     }
 }
-

@@ -4,23 +4,24 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MyFilmDatabase.DatabaseContext;
+using MyFilmDatabase.Models;
+using MyFilmDatabase.Views;
 
 namespace MyFilmDatabase
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             //Database.SetInitializer(new DatabaseInitializer());
-            
+            //Database.SetInitializer<Models.DatabaseContext>(null);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainView());
         }
     }
 }
