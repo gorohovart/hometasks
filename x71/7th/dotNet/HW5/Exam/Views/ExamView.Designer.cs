@@ -42,17 +42,16 @@ namespace Exam.Views
             this.resultsListView.Location = new System.Drawing.Point(3, 1);
             this.resultsListView.Name = "resultsListView";
             this.resultsListView.Size = new System.Drawing.Size(308, 288);
-            this.resultsListView.TabIndex = 0;
+            this.resultsListView.TabIndex = 1;
             this.resultsListView.UseCompatibleStateImageBehavior = false;
             this.resultsListView.View = System.Windows.Forms.View.Details;
             // 
             // StartButton
             //
-
-            //this.StartButton.Location = new System.Drawing.Point((this.ClientSize.Width - this.StartButton.Width) / 2, 333);
+           
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(75, 23);
-            this.StartButton.TabIndex = 2;
+            this.StartButton.TabIndex = 0;
             this.StartButton.Text = "button1";
             this.StartButton.UseVisualStyleBackColor = true;
             // 
@@ -66,14 +65,18 @@ namespace Exam.Views
             // 
             // label1
             // 
-            this.progressBarLabel.AutoSize = true;
-            this.progressBarLabel.Location = new System.Drawing.Point(139, 305);
+            progressBarLabel.AutoSize = false;
+            progressBarLabel.Width = 20;
+            progressBarLabel.TextAlign = ContentAlignment.MiddleCenter;
+            progressBarLabel.Location = new Point((ClientSize.Width - progressBarLabel.Width) / 2, 305);
             this.progressBarLabel.Name = "progressBarLabel";
             this.progressBarLabel.Size = new System.Drawing.Size(35, 13);
             this.progressBarLabel.TabIndex = 4;
-            //this.progressBarLabel.Text = "0/0";
-            //this.progressBarLabel.Parent = this.examProgressBar;
             this.progressBarLabel.BackColor = Color.Transparent;
+
+
+            AddColumnsListView();
+            UpdateStartButtonState(StartButtonSize.First);
             // 
             // ExamView
             // 

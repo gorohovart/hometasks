@@ -16,17 +16,9 @@ namespace Exam.Views
         public ExamView()
         {
             InitializeComponent();
-            AddColumnsListView();
-            this.SizeChanged += OnFormSizeChanges;
 
+            SizeChanged += OnFormSizeChanges;
             StartButton.Click += OnButtonStartClick;
-
-            StartButtonUpdateState(StartButtonSize.First);
-
-            progressBarLabel.AutoSize = false;
-            progressBarLabel.Width = 20;
-            progressBarLabel.TextAlign = ContentAlignment.MiddleCenter;
-            progressBarLabel.Location = new Point((ClientSize.Width - progressBarLabel.Width)/2, 305);
         }
 
         private void Action(Action action, ISynchronizeInvoke control)
@@ -70,7 +62,7 @@ namespace Exam.Views
         {
             Action(() =>
             {
-                StartButtonUpdateState(StartButtonSize.Next);
+                UpdateStartButtonState(StartButtonSize.Next);
             }, StartButton);
             MessageBox.Show(Resource.ExamFinished);
         }
@@ -97,14 +89,14 @@ namespace Exam.Views
         private void OnButtonStartClick(object sender, EventArgs e)
         {
             ResetProgress();
-            StartButtonUpdateState(StartButtonSize.InProgress);
+            UpdateStartButtonState(StartButtonSize.InProgress);
             examProgressBar.Value = 0;
             resultsListView.Items.Clear();
             resultsListView.Refresh();
             ExamStarted?.Invoke(this, EventArgs.Empty);
         }
 
-        private void StartButtonUpdateState(StartButtonSize size)
+        private void UpdateStartButtonState(StartButtonSize size)
         {
             switch (size)
             {

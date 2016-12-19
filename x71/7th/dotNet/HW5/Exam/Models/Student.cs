@@ -5,7 +5,7 @@ namespace Exam.Models
 {
     internal sealed class Student
     {
-        private static int CurrentNumberToGive = 1;
+        private static int _currentNumberToGive = 1;
         public string Name { get; }
         public int Mark { get; private set; }
         private readonly DeanOffice _deanOffice;
@@ -14,7 +14,7 @@ namespace Exam.Models
         {
             _deanOffice = deanOffice;
             Name = Randomizer.GetStudentName();
-            TicketNumber = CurrentNumberToGive++;
+            TicketNumber = _currentNumberToGive++;
         }
 
         public void Initialize()

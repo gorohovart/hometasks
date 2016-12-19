@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using Exam.Controllers;
 using Exam.Views;
 
@@ -10,8 +11,8 @@ namespace Exam
         private static void Main(string[] args)
         {
             var view = new ExamView();
-            var controller = new ExamController(view);
-            view.ShowDialog();
+            var contriller = new ExamController(view);
+            Application.Run(view);
         }
     }
 }

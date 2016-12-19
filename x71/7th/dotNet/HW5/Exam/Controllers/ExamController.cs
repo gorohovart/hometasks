@@ -55,7 +55,7 @@ namespace Exam.Controllers
 
             foreach (var student in _studentsList)
             {
-                new Thread(student.Initialize).Start();
+                (new Thread(student.Initialize) {IsBackground = true}).Start();
             }
             _deanOffice.StartExam();
         }

@@ -9,7 +9,7 @@ namespace Exam.Helpers
         private const int MaxStudents = 10;
         private const int MinTime = 2;
         private const int MinStudents = 5;
-        private static readonly Random random = new Random();
+        private static readonly Random Random = new Random();
 
         private static readonly string[][] Names = {
             new[]{ "Егор", "Владимир", "Петр", "Константин", "Иван", "Семен"},
@@ -18,16 +18,16 @@ namespace Exam.Helpers
 
         public static TimeSpan GetRandomTime(int maxSeconds) => TimeSpan.FromSeconds(new Random().Next(MinTime,maxSeconds));
 
-        public static int GetStudentMark() => random.Next(MinStudentMark, MaxStudentMark);
+        public static int GetStudentMark() => Random.Next(MinStudentMark, MaxStudentMark);
 
-        public static int GetNumberOfStudents() => random.Next(MinStudents, MaxStudents);
+        public static int GetNumberOfStudents() => Random.Next(MinStudents, MaxStudents);
 
         public static string GetStudentName()
         {
-            var gender = random.Next(1);
+            var gender = Random.Next(1);
             var ending = (gender == 1) ? "a" : "";
-            var name = Names[gender][random.Next(Names[gender].Length - 1)];
-            var surname = Surnames[random.Next(Surnames.Length - 1)] + ending;
+            var name = Names[gender][Random.Next(Names[gender].Length - 1)];
+            var surname = Surnames[Random.Next(Surnames.Length - 1)] + ending;
             return $"{name} {surname}";
         }
     }
