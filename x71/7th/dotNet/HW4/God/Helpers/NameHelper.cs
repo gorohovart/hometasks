@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace God.Helpers
 {
-    public sealed class NameHelper
+    public static class NameHelper
     {
         public static string GetTypeName(object obj)
         {

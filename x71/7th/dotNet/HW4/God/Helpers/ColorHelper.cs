@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace God.Helpers
 {
-    internal sealed class ColorHelper
+    internal static class ColorHelper
     {
         public static ConsoleColor ParseColor(string colorName)
         {

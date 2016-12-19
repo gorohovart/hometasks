@@ -25,14 +25,7 @@ namespace God.Helpers
         {
             if (child == null) throw new ArgumentNullException();
             var human = child as Human;
-            if (human != null)
-            {
-                Console.ForegroundColor = human.PrintColor;
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Gray;
-            }
+            Console.ForegroundColor = human?.PrintColor ?? ConsoleColor.Gray;
             Console.WriteLine($"  {Resource.ChildBorn}{child}");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
