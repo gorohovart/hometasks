@@ -2,7 +2,7 @@
 
 namespace MyFilmDatabase.Models
 {
-    public class DatabaseContext : DbContext
+    internal class DatabaseContext : DbContext
     {
         public DbSet<Person> Persons { get; set; }
         public DbSet<Film> Films { get; set; }

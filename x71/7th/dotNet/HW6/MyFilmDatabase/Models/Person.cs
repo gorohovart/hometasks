@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MyFilmDatabase.Models
 {
-    public class Person
+    internal class Person
     {
         public int PersonId { get; set; }
         public string Name { get; set; }

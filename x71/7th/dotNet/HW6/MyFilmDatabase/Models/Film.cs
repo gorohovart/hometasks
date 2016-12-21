@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using MyFilmDatabase.DataStructures;
 
 namespace MyFilmDatabase.Models
 {
-    public class Film
+    internal class Film
     {
         //public Film(int filmId, string title, string country, DateTime year, string imagePath, List<Person> directors, List<Person> actors)
         //{
@@ -13,7 +14,7 @@ namespace MyFilmDatabase.Models
         //    Title = title;
         //    Country = country;
         //    Year = year;
-        //    ImagePath = imagePath;
+        //    Image = imagePath;
         //    Directors = directors;
         //    Actors = actors;
         //}
@@ -24,7 +25,7 @@ namespace MyFilmDatabase.Models
         public string Title { get; set; }
         public string Country { get; set; }
         public DateTime Year { get; set; }
-        public string ImagePath { get; set; }
+        public Image Image { get; set; }
 
         public virtual ObservableListSource<Person> Actors
         {
