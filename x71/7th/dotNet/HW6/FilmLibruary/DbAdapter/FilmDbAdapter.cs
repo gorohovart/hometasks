@@ -55,12 +55,12 @@ namespace FilmLibruary.DbAdapter
 
         public bool RemoveFilm(List<int> ids)
         {
-            //string deleteFilmQuery = "delete from Films where id = {0}";
-            //foreach (int i in ids)
-            //{
-            //    var formattedString = string.Format(deleteFilmQuery, i);
-            //    _filmDbWorker.ExecuteReadQuery(formattedString);
-            //}
+            const string deleteFilmQuery = "delete from Films where id = {0}";
+            foreach (int i in ids)
+            {
+                var formattedString = string.Format(deleteFilmQuery, i);
+                _filmDbWorker.ExecuteReadQuery(formattedString);
+            }
 
             return true;
         }

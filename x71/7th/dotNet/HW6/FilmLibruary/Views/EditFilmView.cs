@@ -16,6 +16,15 @@ namespace FilmLibruary.Views
         public EditFilmView()
         {
             InitializeComponent();
+            this.KeyDown += Form_KeyDown;
+        }
+
+        private void Form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
 
         private void InitTextBoxes()

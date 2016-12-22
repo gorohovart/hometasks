@@ -52,6 +52,7 @@
     <Compile Include="DbAdapter\DBHelper\FilmDbHelper.cs" />
     <Compile Include="DbAdapter\DBHelper\FilmColumns.cs" />
     <Compile Include="DbAdapter\IFilmDbAdapter.cs" />
+    <Compile Include="DbWorkers\AsyncHelper.cs" />
     <Compile Include="DbWorkers\FilmDbWorker.cs" />
     <Compile Include="DbWorkers\IFilmDbWorker.cs" />
     <Compile Include="Controller\IFilmController.cs" />

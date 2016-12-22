@@ -14,13 +14,13 @@ namespace FilmLibruary.Views
 {
     internal partial class LibraryView : Form
     {
-        private const string ActorsSeparator = ", ";
-        private IFilmController _firmController;
+        private IFilmController _filmController;
         private FindFilmView _findFilmView = new FindFilmView();
         private readonly AboutView _aboutView = new AboutView();
         private readonly EditFilmView _editFilmView = new EditFilmView();
-        private BindingList<FilmViewModel> _films = new BindingList<FilmViewModel>(); 
+        private BindingList<FilmViewModel> _films = new BindingList<FilmViewModel>();
 
+        private SortType _nameSort = SortType.Ascending;
         private SortType _yearSort = SortType.Ascending;
         private SortType _countrySort = SortType.Ascending;
 
@@ -36,7 +36,7 @@ namespace FilmLibruary.Views
             _editFilmView.EditFilmCompleted += OnEditFilmCompleted;
         }
 
-        public void SetController(IFilmController controller) => _firmController = controller;
+        public void SetController(IFilmController controller) => _filmController = controller;
 
         private void OpenDbClick(object sender, EventArgs e)
         {
@@ -54,18 +54,26 @@ namespace FilmLibruary.Views
                 ChangeFormState(FilmLibruaryStates.DbOpenStarted);
                 var fileName = openDbFileDialog.FileName;
 
-                _firmController.OpenNewDbFilms(fileName);
-                var films = _firmController.GetFilms();
-                var viewFilms = FilmsToViewModel(films);
-                _films = new BindingList<FilmViewModel>(viewFilms);
-                FilmsGrid.DataSource = _films;
-                ChangeFormState(FilmLibruaryStates.DbOpenEnded);
+                _filmController.LoadComplete += OnFilmsLoaded;
+                _filmController.StartFilmsLoad(fileName);
+                
             }
             catch (Exception)
             {
                 MessageBox.Show(Resources.CantOpenFile);
             }
         }
+
+        private void OnFilmsLoaded(object sender, EventArgs e)
+        {
+            Action(() =>
+            { 
+                _films = _filmController.GetFilmBindingList();
+                FilmsGrid.DataSource = _films;
+                ChangeFormState(FilmLibruaryStates.DbOpenEnded);
+            }, this);
+        }
+
 
         private void ExitClick(object sender, EventArgs e) => Close();
 
@@ -123,7 +131,7 @@ namespace FilmLibruary.Views
                 {
                     FilmsGrid.Rows.Remove(row);
                 }
-                _firmController.RemoveFilms(idFilmsForDelete);
+                _filmController.RemoveFilms(idFilmsForDelete);
             }
         }
 
@@ -162,13 +170,21 @@ namespace FilmLibruary.Views
             if (sender == null || searchEventArgs == null) return;
 
             ChangeFormState(FilmLibruaryStates.SearchStarted);
-            var findedFilms = _firmController.FindFilms(searchEventArgs.SearchDescriptor);
-
-            var viewFilms = FilmsToViewModel(findedFilms);
-            _films = new BindingList<FilmViewModel>(viewFilms);
-            FilmsGrid.DataSource = _films;
-            ChangeFormState(FilmLibruaryStates.SearchEnded);
+            _filmController.SearchComplete += OnSearchComplete;
+            _filmController.StartFilmsSearch(searchEventArgs.SearchDescriptor);
         }
+
+        private void OnSearchComplete(object sender, EventArgs e)
+        {
+            Action(() =>
+            {
+                _films = _filmController.GetFilmBindingList();
+                FilmsGrid.DataSource = _films;
+                ChangeFormState(FilmLibruaryStates.SearchEnded);
+            }, this);
+        }
+
+
 
         private void OnEditFilmCompleted(object sender, EventArgs e)
         {
@@ -179,7 +195,7 @@ namespace FilmLibruary.Views
             _editedFilm.Producer = searchEventArgs.EditedFilm.Producer;
             _editedFilm.Name = searchEventArgs.EditedFilm.Name;
 
-            _firmController.EditFilm(searchEventArgs.EditedFilm);
+            _filmController.EditFilm(searchEventArgs.EditedFilm);
         }
 
         private void OnFindFormClosed(object sender, EventArgs e)
@@ -196,6 +212,18 @@ namespace FilmLibruary.Views
 
             switch ((FilmViewFields)e.ColumnIndex)
             {
+                case FilmViewFields.Name:
+                    if (_yearSort == SortType.Ascending)
+                    {
+                        _films = new BindingList<FilmViewModel>(_films.OrderByDescending(f => f.Name).ToList());
+                        _yearSort = SortType.Descending;
+                    }
+                    else
+                    {
+                        _films = new BindingList<FilmViewModel>(_films.OrderBy(f => f.Name).ToList());
+                        _yearSort = SortType.Ascending;
+                    }
+                    break;
                 case FilmViewFields.Year:
                     if (_yearSort == SortType.Ascending)
                     {
@@ -230,25 +258,6 @@ namespace FilmLibruary.Views
             _findFilmView = new FindFilmView();
             _findFilmView.FormClosed += OnFindFormClosed;
             _findFilmView.SearchDescriptorCompleted += OnSearchDescriptorCompleted;
-        }
-
-        private static List<FilmViewModel> FilmsToViewModel(IEnumerable<Film> films)
-        {
-            return (from film in films
-                    let producerName = film.Producer.Name
-                    let mainActorsNames = film.MainActors.Select(actor => actor.Name)
-                    let actors = string.Join(ActorsSeparator, mainActorsNames)
-                    let picture = new Bitmap(film.Picture, new Size(100, 100))
-                    select new FilmViewModel
-                    {
-                        Id = film.Id,
-                        Name = film.Name,
-                        Picture = picture,
-                        Year = film.Year,
-                        Country = film.Country,
-                        Producer = producerName,
-                        Actors = actors
-                    }).ToList();
         }
 
         private void ChangeFormState(FilmLibruaryStates state)
@@ -325,6 +334,18 @@ namespace FilmLibruary.Views
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("state", state, null);
+            }
+        }
+
+        private void Action(Action action, ISynchronizeInvoke control)
+        {
+            if (control.InvokeRequired)
+            {
+                Invoke(action);
+            }
+            else
+            {
+                action();
             }
         }
 

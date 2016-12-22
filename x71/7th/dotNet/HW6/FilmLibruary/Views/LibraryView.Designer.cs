@@ -43,6 +43,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FilmsGrid = new System.Windows.Forms.DataGridView();
+            this.FormStateLabel = new System.Windows.Forms.Label();
             this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PictureColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,7 +51,6 @@
             this.CountryColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProducerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MainActorsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FormStateLabel = new System.Windows.Forms.Label();
             this.menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FilmsGrid)).BeginInit();
             this.SuspendLayout();
@@ -201,6 +201,16 @@
             this.FilmsGrid.TabIndex = 1;
             this.FilmsGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.FilmsGridColumnHeaderMouseClick);
             // 
+            // FormStateLabel
+            // 
+            this.FormStateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FormStateLabel.Location = new System.Drawing.Point(252, 24);
+            this.FormStateLabel.Name = "FormStateLabel";
+            this.FormStateLabel.Size = new System.Drawing.Size(400, 21);
+            this.FormStateLabel.TabIndex = 2;
+            this.FormStateLabel.Text = "База фильмов не выбрана";
+            this.FormStateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // IdColumn
             // 
             this.IdColumn.DataPropertyName = "Id";
@@ -221,7 +231,6 @@
             this.NameColumn.DataPropertyName = "Name";
             this.NameColumn.HeaderText = "Name";
             this.NameColumn.Name = "NameColumn";
-            this.NameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // YearColumn
             // 
@@ -249,27 +258,17 @@
             this.MainActorsColumn.Name = "MainActorsColumn";
             this.MainActorsColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // FormStateLabel
-            // 
-            this.FormStateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.FormStateLabel.Location = new System.Drawing.Point(252, 24);
-            this.FormStateLabel.Name = "FormStateLabel";
-            this.FormStateLabel.Size = new System.Drawing.Size(400, 21);
-            this.FormStateLabel.TabIndex = 2;
-            this.FormStateLabel.Text = "База фильмов не выбрана";
-            this.FormStateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // LibruaryView
+            // LibraryView
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(923, 672);
+            this.ClientSize = new System.Drawing.Size(923, 671);
             this.Controls.Add(this.FormStateLabel);
             this.Controls.Add(this.FilmsGrid);
             this.Controls.Add(this.menu);
             this.MainMenuStrip = this.menu;
             this.MaximumSize = new System.Drawing.Size(939, 710);
             this.MinimumSize = new System.Drawing.Size(939, 710);
-            this.Name = "LibruaryView";
+            this.Name = "LibraryView";
             this.Text = "Film libruary";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LibruaryViewFormClosing);
             this.menu.ResumeLayout(false);

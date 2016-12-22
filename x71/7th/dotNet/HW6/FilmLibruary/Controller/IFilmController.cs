@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using FilmLibruary.Model;
 
 namespace FilmLibruary.Controller
@@ -7,8 +9,11 @@ namespace FilmLibruary.Controller
     {
         bool EditFilm(FilmEditDescriptor descriptor);
         bool RemoveFilms(List<int> ids);
-        List<Film> GetFilms();
+        BindingList<FilmViewModel> GetFilmBindingList();
         List<Film> FindFilms(SearchDescriptor descriptor);
-        void OpenNewDbFilms(string connectionString);
+        void StartFilmsLoad(string connectionString);
+        void StartFilmsSearch(SearchDescriptor SearchDescriptor);
+        event EventHandler LoadComplete;
+        event EventHandler SearchComplete;
     }
 }

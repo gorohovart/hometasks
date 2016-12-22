@@ -22,7 +22,7 @@ namespace FilmLibruary.Repositories.FilmMatchHelpers
         {
             if (filmName == null || descriptorfilmName == null) return false;
             if (filmName == descriptorfilmName || descriptorfilmName == string.Empty) return true;
-
+            if (filmName.Contains(descriptorfilmName)) return true;
             var regexpStr = StringToRegexString(descriptorfilmName);
             var regex = new Regex(regexpStr);
             var result = regex.IsMatch(filmName);

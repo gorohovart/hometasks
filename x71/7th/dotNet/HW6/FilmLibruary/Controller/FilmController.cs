@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using FilmLibruary.Model;
 using FilmLibruary.Repositories;
 using FilmLibruary.Views;
@@ -9,6 +15,11 @@ namespace FilmLibruary.Controller
     {
         private readonly IFilmRepository _filmRepository;
         private readonly LibraryView _libruaryView;
+        private string _connectionString;
+        private BindingList<FilmViewModel> _filmBindingList;
+        private SearchDescriptor _searchDescriptor;
+        public event EventHandler LoadComplete;
+        public event EventHandler SearchComplete;
 
         public FilmController(LibraryView libruaryView, IFilmRepository filmRepository)
         {
@@ -16,7 +27,7 @@ namespace FilmLibruary.Controller
             _libruaryView = libruaryView;
             _libruaryView.SetController(this);
         }
-
+        
         #region ViewToModelMethods
         public bool EditFilm(FilmEditDescriptor descriptor)
         {
@@ -28,6 +39,11 @@ namespace FilmLibruary.Controller
             return ids != null && _filmRepository.RemoveFilms(ids);
         }
 
+        public BindingList<FilmViewModel> GetFilmBindingList()
+        {
+            return _filmBindingList;
+        }
+
         public List<Film> FindFilms(SearchDescriptor descriptor)
         {
             if (descriptor == null)
@@ -37,14 +53,56 @@ namespace FilmLibruary.Controller
             return _filmRepository.FindFilms(descriptor);
         }
 
-        public List<Film> GetFilms()
+        private List<Film> GetFilms()
         {
             return _filmRepository.GetAllFilms();
         }
 
-        public void OpenNewDbFilms(string connectionString)
+        private static List<FilmViewModel> FilmsToViewModel(IEnumerable<Film> films)
         {
-            _filmRepository.SetConnection(connectionString);
+            return (from film in films
+                    let producerName = film.Producer.Name
+                    let mainActorsNames = film.MainActors.Select(actor => actor.Name)
+                    let actors = string.Join(", ", mainActorsNames)
+                    let picture = new Bitmap(film.Picture, new Size(100, 100))
+                    select new FilmViewModel
+                    {
+                        Id = film.Id,
+                        Name = film.Name,
+                        Picture = picture,
+                        Year = film.Year,
+                        Country = film.Country,
+                        Producer = producerName,
+                        Actors = actors
+                    }).ToList();
+        }
+
+        private void StartLoad()
+        {
+            _filmRepository.SetConnection(_connectionString);
+            var films = GetFilms();
+            var viewFilms = FilmsToViewModel(films);
+            _filmBindingList = new BindingList<FilmViewModel>(viewFilms);
+            LoadComplete?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void StartFilmsLoad(string connectionString)
+        {
+            _connectionString = connectionString;
+            new Task(StartLoad).Start();
+        }
+
+        private void StartSearch()
+        {
+            var list = _searchDescriptor == null ? new List<Film>() : _filmRepository.FindFilms(_searchDescriptor);
+            _filmBindingList = new BindingList<FilmViewModel>(FilmsToViewModel(list));
+            SearchComplete?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void StartFilmsSearch(SearchDescriptor searchDescriptor)
+        {
+            _searchDescriptor = searchDescriptor;
+            new Task(StartSearch).Start();
         }
         #endregion
     }
