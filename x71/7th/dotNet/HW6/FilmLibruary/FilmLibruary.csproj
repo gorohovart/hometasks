@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{123257A9-75F8-4B5C-855C-4510A005E08A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FilmLibruary</RootNamespace>
+    <AssemblyName>FilmLibruary</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\FilmController.cs" />
+    <Compile Include="CustomEventArgs\FilmEditDescriptorEventArgs.cs" />
+    <Compile Include="CustomEventArgs\SearchDescriptorEventArgs.cs" />
+    <Compile Include="DbAdapter\DBHelper\ActorToFilmColumn.cs" />
+    <Compile Include="DbAdapter\FilmDbAdapter.cs" />
+    <Compile Include="DbAdapter\DBHelper\FilmDbHelper.cs" />
+    <Compile Include="DbAdapter\DBHelper\FilmColumns.cs" />
+    <Compile Include="DbAdapter\IFilmDbAdapter.cs" />
+    <Compile Include="DbWorkers\FilmDbWorker.cs" />
+    <Compile Include="DbWorkers\IFilmDbWorker.cs" />
+    <Compile Include="Controller\IFilmController.cs" />
+    <Compile Include="Model\FilmEditDescriptor.cs" />
+    <Compile Include="Model\SearchDescriptor.cs" />
+    <Compile Include="Repositories\FilmMatchHelpers\FilmMatchHelper.cs" />
+    <Compile Include="Repositories\FilmMatchHelpers\IFilmMatchHelper.cs" />
+    <Compile Include="Views\AboutView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AboutView.Designer.cs">
+      <DependentUpon>AboutView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditFilmView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\EditFilmView.Designer.cs">
+      <DependentUpon>EditFilmView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FieldValidator\FieldValidator.cs" />
+    <Compile Include="Views\ViewEnums\FilmLibruaryStates.cs" />
+    <Compile Include="Views\FindFilmView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FindFilmView.Designer.cs">
+      <DependentUpon>FindFilmView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Actor.cs" />
+    <Compile Include="Model\ActorToFilm.cs" />
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\Producer.cs" />
+    <Compile Include="Repositories\IFilmRepository.cs" />
+    <Compile Include="Repositories\FilmRepository.cs" />
+    <Compile Include="Model\Film.cs" />
+    <Compile Include="Model\FilmViewModel.cs" />
+    <Compile Include="Views\LibraryView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\LibraryView.Designer.cs">
+      <DependentUpon>LibraryView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ViewEnums\FilmViewFields.cs" />
+    <Compile Include="Views\ViewEnums\SortType.cs" />
+    <Compile Include="Views\YearTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <EmbeddedResource Include="Views\AboutView.resx">
+      <DependentUpon>AboutView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\EditFilmView.resx">
+      <DependentUpon>EditFilmView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FindFilmView.resx">
+      <DependentUpon>FindFilmView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LibraryView.resx">
+      <DependentUpon>LibraryView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Views\YearTextBox.resx">
+      <DependentUpon>YearTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImageResource.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
