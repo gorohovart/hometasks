@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using FilmLibruary.Controller;
 using FilmLibruary.CustomEventArgs;
@@ -20,11 +21,9 @@ namespace FilmLibruary.Views
         private readonly EditFilmView _editFilmView = new EditFilmView();
         private BindingList<FilmViewModel> _films = new BindingList<FilmViewModel>();
 
-        private SortType _nameSort = SortType.Ascending;
-        private SortType _yearSort = SortType.Ascending;
-        private SortType _countrySort = SortType.Ascending;
-
         private FilmViewModel _editedFilm;
+
+        private ListSorter _sorter = new ListSorter();
 
         public LibraryView()
         {
@@ -34,6 +33,7 @@ namespace FilmLibruary.Views
             _findFilmView.SearchDescriptorCompleted += OnSearchDescriptorCompleted;
             _findFilmView.FormClosed += OnFindFormClosed;
             _editFilmView.EditFilmCompleted += OnEditFilmCompleted;
+            _sorter.SortComplete += OnSortComplete;
         }
 
         public void SetController(IFilmController controller) => _filmController = controller;
@@ -184,8 +184,6 @@ namespace FilmLibruary.Views
             }, this);
         }
 
-
-
         private void OnEditFilmCompleted(object sender, EventArgs e)
         {
             var searchEventArgs = e as FilmEditDescriptorEventArgs;
@@ -205,52 +203,21 @@ namespace FilmLibruary.Views
 
         private void FilmsGridColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (sender == null || e == null)
+            if (sender == null || e == null || _films == null)
             {
                 return;
             }
 
-            switch ((FilmViewFields)e.ColumnIndex)
-            {
-                case FilmViewFields.Name:
-                    if (_yearSort == SortType.Ascending)
-                    {
-                        _films = new BindingList<FilmViewModel>(_films.OrderByDescending(f => f.Name).ToList());
-                        _yearSort = SortType.Descending;
-                    }
-                    else
-                    {
-                        _films = new BindingList<FilmViewModel>(_films.OrderBy(f => f.Name).ToList());
-                        _yearSort = SortType.Ascending;
-                    }
-                    break;
-                case FilmViewFields.Year:
-                    if (_yearSort == SortType.Ascending)
-                    {
-                        _films = new BindingList<FilmViewModel>(_films.OrderByDescending(f => f.Year).ToList());
-                        _yearSort = SortType.Descending;
-                    }
-                    else
-                    {
-                        _films = new BindingList<FilmViewModel>(_films.OrderBy(f => f.Year).ToList());
-                        _yearSort = SortType.Ascending;
-                    }
-                    break;
-                case FilmViewFields.Country:
-                    if (_countrySort == SortType.Ascending)
-                    {
-                        _films = new BindingList<FilmViewModel>(_films.OrderByDescending(f => f.Country).ToList());
-                        _countrySort =SortType.Descending;
-                    }
-                    else
-                    {
-                        _films = new BindingList<FilmViewModel>(_films.OrderBy(f => f.Country).ToList());
-                        _countrySort = SortType.Ascending;
-                    }
-                    break;
-            }
+            _sorter.SortList(_films, e.ColumnIndex);
+        }
 
-            FilmsGrid.DataSource = _films;
+        private void OnSortComplete(object sender, EventArgs eventArgs)
+        {
+            Action(() =>
+            {
+                _films = _sorter.BindingList;
+                FilmsGrid.DataSource = _films;
+            }, this);
         }
         
         private void CreateFilmView()

@@ -52,7 +52,6 @@
     <Compile Include="DbAdapter\DBHelper\FilmDbHelper.cs" />
     <Compile Include="DbAdapter\DBHelper\FilmColumns.cs" />
     <Compile Include="DbAdapter\IFilmDbAdapter.cs" />
-    <Compile Include="DbWorkers\AsyncHelper.cs" />
     <Compile Include="DbWorkers\FilmDbWorker.cs" />
     <Compile Include="DbWorkers\IFilmDbWorker.cs" />
     <Compile Include="Controller\IFilmController.cs" />
@@ -97,6 +96,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\ViewEnums\FilmViewFields.cs" />
+    <Compile Include="Views\ViewEnums\ListSorter.cs" />
     <Compile Include="Views\ViewEnums\SortType.cs" />
     <Compile Include="Views\YearTextBox.cs">
       <SubType>UserControl</SubType>
