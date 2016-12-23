@@ -30,13 +30,27 @@ namespace FilmLibruary.Views
             InitializeComponent();
             ChangeFormState(FilmLibruaryStates.DbNotOpen);
             FilmsGrid.AutoGenerateColumns = false;
+            
             _findFilmView.SearchDescriptorCompleted += OnSearchDescriptorCompleted;
             _findFilmView.FormClosed += OnFindFormClosed;
             _editFilmView.EditFilmCompleted += OnEditFilmCompleted;
             _sorter.SortComplete += OnSortComplete;
         }
 
-        public void SetController(IFilmController controller) => _filmController = controller;
+        private void OnExeptionHappened(object sender, EventArgs e)
+        {
+            Action(() =>
+            {
+                MessageBox.Show(Resources.CantOpenFile);
+                ChangeFormState(FilmLibruaryStates.DbNotOpen);
+            },this);
+        }
+
+        public void SetController(IFilmController controller)
+        {
+            _filmController = controller;
+            _filmController.ExeptionHappened += OnExeptionHappened;
+        }
 
         private void OpenDbClick(object sender, EventArgs e)
         {
@@ -49,19 +63,12 @@ namespace FilmLibruary.Views
             };
 
             if (openDbFileDialog.ShowDialog() != DialogResult.OK) return;
-            try
-            {
-                ChangeFormState(FilmLibruaryStates.DbOpenStarted);
-                var fileName = openDbFileDialog.FileName;
+            
+            ChangeFormState(FilmLibruaryStates.DbOpenStarted);
+            var fileName = openDbFileDialog.FileName;
 
-                _filmController.LoadComplete += OnFilmsLoaded;
-                _filmController.StartFilmsLoad(fileName);
-                
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Resources.CantOpenFile);
-            }
+            _filmController.LoadComplete += OnFilmsLoaded;
+            _filmController.StartFilmsLoad(fileName);
         }
 
         private void OnFilmsLoaded(object sender, EventArgs e)

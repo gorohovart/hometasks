@@ -15,5 +15,6 @@ namespace FilmLibruary.Controller
         void StartFilmsSearch(SearchDescriptor SearchDescriptor);
         event EventHandler LoadComplete;
         event EventHandler SearchComplete;
+        event EventHandler ExeptionHappened;
     }
 }

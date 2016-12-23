@@ -19,7 +19,7 @@ namespace FilmLibruary.DbAdapter
 
             var tempDictionary = new Dictionary<int, Film>();
 
-            var filmWithoutActors = _filmDbWorker.ExecuteReadQuery(getFilmsQuery);
+            var filmWithoutActors = _filmDbWorker.ExecuteQuery(getFilmsQuery);
 
             foreach (DbDataRecord rec in filmWithoutActors)
             {
@@ -28,7 +28,7 @@ namespace FilmLibruary.DbAdapter
             }
 
             //add actors
-            var filmIdToActorsRecs = _filmDbWorker.ExecuteReadQuery(getActorsToFilmQuery);
+            var filmIdToActorsRecs = _filmDbWorker.ExecuteQuery(getActorsToFilmQuery);
             foreach (DbDataRecord rec in filmIdToActorsRecs)
             {
                 var filmIdToActor = _dbHelper.ConvertRecordToActorToFilm(rec);
@@ -48,7 +48,7 @@ namespace FilmLibruary.DbAdapter
         {
             const string editFilmQuery = "update Films set Name = '{0}', Year = {1}, Producer = '{2}' where Id = {3}";
             var formattedQuery = string.Format(editFilmQuery, descriptor.Name, descriptor.Year, descriptor.Producer, descriptor.FilmId);
-            _filmDbWorker.ExecuteReadQuery(formattedQuery);
+            _filmDbWorker.ExecuteQuery(formattedQuery);
 
             return true;
         }
@@ -59,7 +59,7 @@ namespace FilmLibruary.DbAdapter
             foreach (int i in ids)
             {
                 var formattedString = string.Format(deleteFilmQuery, i);
-                _filmDbWorker.ExecuteReadQuery(formattedString);
+                _filmDbWorker.ExecuteQuery(formattedString);
             }
 
             return true;
@@ -67,7 +67,7 @@ namespace FilmLibruary.DbAdapter
 
         public void SetConnection(string connectionString)
         {
-            _filmDbWorker.SetConnection(connectionString);
+            _filmDbWorker.SetConnectionString(connectionString);
         }
     }
 }

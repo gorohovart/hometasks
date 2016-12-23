@@ -5,7 +5,7 @@ namespace FilmLibruary.DbWorkers
 {
     internal interface IFilmDbWorker
     {
-        void SetConnection(string connectionString);
-        List<DbDataRecord> ExecuteReadQuery(string query);
+        void SetConnectionString(string connectionString);
+        List<DbDataRecord> ExecuteQuery(string query);
     }
 }

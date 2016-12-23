@@ -20,6 +20,7 @@ namespace FilmLibruary.Controller
         private SearchDescriptor _searchDescriptor;
         public event EventHandler LoadComplete;
         public event EventHandler SearchComplete;
+        public event EventHandler ExeptionHappened;
 
         public FilmController(LibraryView libruaryView, IFilmRepository filmRepository)
         {
@@ -89,7 +90,9 @@ namespace FilmLibruary.Controller
         public void StartFilmsLoad(string connectionString)
         {
             _connectionString = connectionString;
-            new Task(StartLoad).Start();
+            var task = new Task(StartLoad);
+            task.ContinueWith(ExceptionHandler, TaskContinuationOptions.OnlyOnFaulted);
+            task.Start();
         }
 
         private void StartSearch()
@@ -103,6 +106,11 @@ namespace FilmLibruary.Controller
         {
             _searchDescriptor = searchDescriptor;
             new Task(StartSearch).Start();
+        }
+        private void ExceptionHandler(Task task)
+        {
+            var exception = task.Exception;
+            ExeptionHappened?.Invoke(this, EventArgs.Empty);
         }
         #endregion
     }

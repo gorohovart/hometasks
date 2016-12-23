@@ -16,7 +16,8 @@ namespace FilmLibruary.Views
         public EditFilmView()
         {
             InitializeComponent();
-            this.KeyDown += Form_KeyDown;
+            KeyPreview = true;
+            KeyDown += Form_KeyDown;
         }
 
         private void Form_KeyDown(object sender, KeyEventArgs e)
